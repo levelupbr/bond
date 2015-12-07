@@ -1,0 +1,30 @@
+{
+  "name": "Bond",
+  "version": "1.0.0",
+  "description": "Application interface that monitors the versions of the applications that users are.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/levelupbr/bond.git"
+  },
+  "author": [
+    "Paulo Campos <http://paulofrontend.com.br/>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/levelupbr/bond/issues"
+  },
+  "homepage": "https://github.com/levelupbr/bond",
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "gulp": "^3.9.0",
+    "gulp-html-validator": "0.0.5",
+    "gulp-jshint": "^2.0.0",
+    "gulp-jslint": "^0.2.2",
+    "gulp-less": "^3.0.5",
+    "jshint": "^2.8.0"
+  }
+}

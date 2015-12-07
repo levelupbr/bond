@@ -1,0 +1,32 @@
+{
+  "name": "Bond",
+  "description": "Application interface that monitors the versions of the applications that users are.",
+  "main": "gulpfile.js",
+  "authors": [
+    "Paulo Campos <http://paulofrontend.com.br/>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "level",
+    "up",
+    "bond",
+    "monitoring",
+    "users",
+    "version"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "html5shiv": "~3.7.3",
+    "normalize-css": "normalize.css#~3.0.3"
+  }
+}

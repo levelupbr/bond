@@ -1,0 +1,15 @@
+# Ignored folders
+bower_components/
+layout/
+node_modules/
+validation/
+
+
+# Ignored files
+README.html
+
+
+# Ignored extensions
+*.log
+*.sublime-project
+*.sublime-workspace
