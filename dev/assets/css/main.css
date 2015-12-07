@@ -1,0 +1,164 @@
+/*===============================
+=            Imports            =
+===============================*/
+/*=================================
+=            Variables            =
+=================================*/
+/*=====  End of Variables  ======*/
+/*==============================
+=            Mixins            =
+==============================*/
+/*=====  End of Mixins  ======*/
+/*=====  End of Imports  ======*/
+/*============================
+=            Base            =
+============================*/
+.base {
+  background: #252525;
+  min-width: 1000px;
+}
+header,
+footer {
+  background: #171717;
+}
+header,
+main,
+footer {
+  padding: 20px 40px;
+}
+header .title {
+  left: 0;
+}
+header .title h2 {
+  font-size: 3.125em;
+}
+main {
+  padding-bottom: 40px;
+}
+main ul {
+  width: 100%;
+  display: table;
+}
+main ul li {
+  padding-bottom: 10px;
+}
+main ul li:last-child {
+  padding-bottom: 0;
+}
+main ul button {
+  font-size: 20px!important;
+  font-weight: bold!important;
+  text-align: left;
+  background: #000;
+  width: 100%;
+  height: 50px;
+  padding-left: 56px;
+  border-radius: 4px;
+  position: relative;
+  opacity: .8;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+main ul button:before {
+  content: '';
+  background: url('../imgs/icon.png');
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+}
+main ul button:hover {
+  opacity: 1;
+}
+main ul .content {
+  background: #333333;
+  border-radius: 0 0 4px 4px;
+  padding: 10px 0 20px;
+  margin: 0 2px;
+  display: none;
+}
+main ul .content ul {
+  width: auto;
+  height: 40px;
+  margin: 0 10px;
+  box-sizing: border-box;
+  display: block;
+}
+main ul .content ul.categorys li,
+main ul .content ul.categorys action {
+  font-weight: bold!important;
+}
+main ul .content ul.categorys .downgrade {
+  font-size: 12px!important;
+}
+main ul .content ul.categorys .downgrade:before,
+main ul .content ul.categorys .downgrade:after {
+  content: '';
+  position: absolute;
+}
+main ul .content ul.categorys .downgrade:before {
+  background: #fff25d;
+  width: 6px;
+  height: 8px;
+  top: 16px;
+  left: -5px;
+}
+main ul .content ul.categorys .downgrade:after {
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 6px solid  #fff25d;
+  top: 13px;
+  left: 1px;
+}
+main ul .content ul.uneven {
+  background: #444444;
+}
+main ul .content ul.deprecated li {
+  opacity: 0.2;
+}
+main ul .content ul li {
+  text-align: center;
+  line-height: 40px;
+  width: 20%;
+  padding-bottom: 0;
+  float: left;
+}
+main ul .content ul li.status {
+  width: 30%;
+}
+main ul .content ul li .action {
+  line-height: 40px;
+  width: 50%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+}
+main ul .content ul li .action.current {
+  text-align: right;
+}
+main ul .content ul li .action.downgrade {
+  text-align: left;
+}
+main ul .state {
+  width: 50%;
+  float: left;
+}
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  display: table;
+}
+footer .copyright {
+  font-size: 0.75em;
+  line-height: 34px;
+  float: left;
+}
+footer .logo {
+  float: right;
+}
+/*=====  End of Base  ======*/

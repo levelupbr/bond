@@ -1,0 +1,145 @@
+/*===============================
+=            Imports            =
+===============================*/
+@import './resources.less';
+/*=====  End of Imports  ======*/
+
+
+/*============================
+=            Base            =
+============================*/
+.base {
+	background: @light-grey;
+	min-width: 1000px;
+}
+header,
+footer { background: @dark-grey; }
+header,
+main,
+footer { padding: 20px 40px; }
+header .title {
+	left: 0;
+
+	h2 { font-size: 3.125em; }
+}
+main {
+	padding-bottom: 40px;
+
+	ul {
+		width: 100%;
+		display: table;
+
+		li {
+			padding-bottom: 10px;
+
+			&:last-child { padding-bottom: 0; }
+		}
+		button {
+			font-size: 20px!important;
+			font-weight: bold!important;
+			text-align: left;
+			background: #000;
+			width: 100%;
+			height: 50px;
+			padding-left: 56px;
+			border-radius: 4px;
+			position: relative;
+			opacity: .8;
+			.transition(.2s);
+
+			&:before {
+				content: '';
+				background: url('@{base-path}imgs/icon.png');
+				width: 30px;
+				height: 30px;
+				margin-top: -15px;
+				position: absolute;
+				top: 50%;
+				left: 20px;
+			}
+			&:hover { opacity: 1; }
+		}
+		.content {
+			background: #333333;
+			border-radius: 0 0 4px 4px;
+			padding: 10px 0 20px;
+			margin: 0 2px;
+			display: none;
+
+			ul {
+				width: auto;
+				height: 40px;
+				margin: 0 10px;
+				box-sizing: border-box;
+				display: block;
+
+				&.categorys {
+					li,
+					action { font-weight: bold!important; }
+					.downgrade {
+						font-size: 12px!important;
+
+						&:before,
+						&:after {
+							content: '';
+							position: absolute;
+						}
+						&:before {
+							background: #fff25d;
+							width: 6px;
+							height: 8px;
+							top: 16px;
+							left: -5px;
+						}
+						&:after {
+							border-top: 7px solid transparent;
+							border-bottom: 7px solid transparent;
+							border-left: 6px solid  #fff25d;
+							top: 13px;
+    						left: 1px;
+						}
+					}
+				}
+				&.uneven { background: #444444; }
+				&.deprecated li { opacity: .2 }
+				li {
+					text-align: center;
+					line-height: 40px;
+					width: 20%;
+					padding-bottom: 0;
+					float: left;
+
+					&.status { width: 30%; }
+					.action {
+						line-height: 40px;
+						width: 50%;
+						padding: 0 15px;
+						box-sizing: border-box;
+						position: relative;
+						float: left;
+
+						&.current   { text-align: right; }
+						&.downgrade { text-align: left; }
+					}
+				}
+			}
+		}
+		.state {
+			width: 50%;
+			float: left;
+		}
+	}
+}
+footer {
+	width: 100%;
+	box-sizing: border-box;
+	display: table;
+
+	.copyright {
+		font-size: 0.75em;
+		line-height: 34px;
+		float: left;
+	}
+	.logo { float: right; }
+}
+/*=====  End of Base  ======*/
