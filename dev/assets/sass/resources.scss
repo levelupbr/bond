@@ -1,0 +1,35 @@
+/*=================================
+=            Variables            =
+=================================*/
+$assets-path: './../';
+
+$light-grey: #252525;
+$dark-grey:  #171717;
+
+$light:      #ffffff;
+$dark:       #000000;
+/*=====  End of Variables  ======*/
+
+
+/*==============================
+=            Mixins            =
+==============================*/
+@mixin transition($transition: .2s){
+    -webkit-transition: $transition;
+       -moz-transition: $transition;
+         -o-transition: $transition;
+            transition: $transition;
+}
+@mixin transform($transform){
+    -webkit-transform: $transform;
+       -moz-transform: $transform;
+         -o-transform: $transform;
+            transform: $transform;
+}
+@mixin animation($animation){
+    -webkit-animation: $animation;
+       -moz-animation: $animation;
+         -o-animation: $animation;
+            animation: $animation;
+}
+/*=====  End of Mixins  ======*/

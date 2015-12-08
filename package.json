@@ -24,7 +24,7 @@
     "gulp-html-validator": "0.0.5",
     "gulp-jshint": "^2.0.0",
     "gulp-jslint": "^0.2.2",
-    "gulp-less": "^3.0.5",
+    "gulp-sass": "^2.1.0",
     "jshint": "^2.8.0"
   }
 }

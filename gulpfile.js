@@ -5,7 +5,7 @@
 ===============================*/
 var gulp          = require('gulp');
 var htmlValidator = require('gulp-html-validator');
-var less          = require('gulp-less');
+var sass          = require('gulp-sass');
 var jshint        = require('gulp-jshint');
 var jslint        = require('gulp-jslint');
 var browserSync   = require('browser-sync').create();
@@ -16,13 +16,13 @@ var browserSync   = require('browser-sync').create();
 =            References            =
 ==================================*/
 var htmlFiles = './dev/**/*.html';
-var lessFiles = './dev/assets/less/**/*.less';
+var sassFiles = './dev/assets/sass/**/*.scss';
 var jsFiles   = './dev/assets/js/**/*.js';
 var gulpFile  = './gulpfile.js';
 
 var cssFolder         = './dev/assets/css';
 var validationFolder  = './validation';
-var developmentFolder = './dev';
+var developmentFolder = './';
 /*=====  End of References  ======*/
 
 
@@ -32,7 +32,7 @@ var developmentFolder = './dev';
 gulp.task('default', function () {
 
     gulp.watch(htmlFiles, ['html']);
-    gulp.watch(lessFiles, ['less']);
+    gulp.watch(sassFiles, ['sass']);
     gulp.watch(jsFiles,   ['js']);
     gulp.watch(gulpFile,  ['gulpfile']);
 });
@@ -44,7 +44,7 @@ gulp.task('dev', function () {
     });
 
     gulp.watch(htmlFiles, ['html']);
-    gulp.watch(lessFiles, ['less']);
+    gulp.watch(sassFiles, ['sass']);
     gulp.watch(jsFiles,   ['js']);
     gulp.watch(gulpFile,  ['gulpfile']);
 
@@ -63,10 +63,10 @@ gulp.task('html', function () {
         .pipe(gulp.dest(validationFolder));
 });
 
-gulp.task('less', function () {
+gulp.task('sass', function () {
 
-    return gulp.src(lessFiles)
-        .pipe(less())
+    return gulp.src(sassFiles)
+        .pipe(sass())
         .pipe(gulp.dest(cssFolder))
         .pipe(browserSync.stream());
 });
