@@ -108,8 +108,6 @@ main {
           width: 20%;
           padding-bottom: 0;
           float: left; }
-          main ul .content ul li.status {
-            width: 30%; }
           main ul .content ul li .action {
             line-height: 40px;
             width: 50%;
@@ -117,10 +115,6 @@ main {
             box-sizing: border-box;
             position: relative;
             float: left; }
-            main ul .content ul li .action.current {
-              text-align: right; }
-            main ul .content ul li .action.downgrade {
-              text-align: left; }
     main ul .state {
       width: 50%;
       float: left; }

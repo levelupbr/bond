@@ -22,7 +22,7 @@ var gulpFile  = './gulpfile.js';
 
 var cssFolder         = './dev/assets/css';
 var validationFolder  = './validation';
-var developmentFolder = './';
+var syncFolder        = './';
 /*=====  End of References  ======*/
 
 
@@ -40,7 +40,7 @@ gulp.task('default', function () {
 gulp.task('dev', function () {
 
     browserSync.init({
-        server: developmentFolder
+        server: syncFolder
     });
 
     gulp.watch(htmlFiles, ['html']);
