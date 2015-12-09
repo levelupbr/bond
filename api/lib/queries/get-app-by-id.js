@@ -14,7 +14,7 @@ let resolve = function(id, defered) {
         apps[id] = data;
         defered.resolve(data);
     });
-}
+};
 
 let getAppById = {
 

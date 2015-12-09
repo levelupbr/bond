@@ -2,7 +2,8 @@
 
 const app = require('../infraestructure/app'),
     createApp = require('../lib/commands/create-app'),
-    getAppStatsById = require('../lib/queries/get-app-stats-by-id');
+    getAppStatsById = require('../lib/queries/get-app-stats-by-id'),
+    getApps = require('../lib/queries/get-apps');
 
 let apps = function() {
 
@@ -25,6 +26,18 @@ let apps = function() {
   app.get('/api/apps/:id/stats', function(req, res) {
   
     getAppStatsById.execute(req.params.id)
+        .then(function(resp) {
+            res.status(200).json(resp);
+        })
+        .catch(function(err) {
+            return res.status(400).json(err);
+        });
+    
+  });
+  
+  app.get('/api/apps/', function(req, res) {
+  
+    getApps.execute()
         .then(function(resp) {
             res.status(200).json(resp);
         })

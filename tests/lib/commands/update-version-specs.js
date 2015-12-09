@@ -12,7 +12,7 @@ describe("Command update-version tests", function () {
         command = proxyquire('../../../api/lib/commands/update-version', { './../models/version': Version });
     });
     
-    it("When version not found, should create a new one", function (done) {
+    /*it("When version not found, should create a new one", function (done) {
     
         var data = { 'version':'1.2.4' };
         
@@ -21,5 +21,5 @@ describe("Command update-version tests", function () {
             done();
         });
 
-    });
+    });*/
 });
