@@ -21,3 +21,4 @@ To install the project dependencies.
 ### Contributors:
 
 - Paulo Campos - Front-End Developer
+- Jeferson Amorim - Developer
