@@ -1,6 +1,6 @@
-/*===============================
-=            Imports            =
-===============================*/
+/*==============================
+=            Import            =
+==============================*/
 /*=================================
 =            Variables            =
 =================================*/
@@ -9,13 +9,13 @@
 =            Mixins            =
 ==============================*/
 /*=====  End of Mixins  ======*/
-/*=====  End of Imports  ======*/
-/*============================
-=            Base            =
-============================*/
+/*=====  End of Import  ======*/
 .base {
   background: #252525;
-  min-width: 1000px; }
+  min-width: 1000px;
+  position: absolute;
+  top: 0;
+  bottom: 0; }
 
 header,
 footer {
@@ -31,8 +31,17 @@ header .title {
   header .title h2 {
     font-size: 3.125em; }
 
+main,
+footer {
+  position: absolute;
+  top: 125px;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
 main {
-  padding-bottom: 40px; }
+  padding-bottom: 40px;
+  bottom: 74px; }
   main ul {
     width: 100%;
     display: table; }
@@ -79,7 +88,7 @@ main {
         box-sizing: border-box;
         display: block; }
         main ul .content ul.categorys li,
-        main ul .content ul.categorys action {
+        main ul .content ul.categorys .action {
           font-weight: bold !important; }
         main ul .content ul.categorys .downgrade {
           font-size: 12px !important; }
@@ -122,12 +131,11 @@ main {
 footer {
   width: 100%;
   box-sizing: border-box;
-  display: table; }
+  display: table;
+  top: auto; }
   footer .copyright {
     font-size: 0.75em;
     line-height: 34px;
     float: left; }
   footer .logo {
     float: right; }
-
-/*=====  End of Base  ======*/

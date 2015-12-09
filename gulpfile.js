@@ -77,7 +77,8 @@ gulp.task('js', function () {
         .pipe(jshint())
         .pipe(jslint({
             node: true,
-            browser: true
+            browser: true,
+            global: ['$']
         }));
 });
 
