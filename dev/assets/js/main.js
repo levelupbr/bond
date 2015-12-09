@@ -5,15 +5,27 @@ $(document).ready(function () {
         $(this).next().slideToggle();
     });
 
-    var contentHeight = $('header').height() + $('footer').height() + $('main').css('padding-top') + $('main').css('padding-bottom');
 
-    $(window).resize(function() {
-        if($(window).height() < contentHeight) {
-            $('.base').removeClass('absolute');
-            $('.base').addClass('static');
+    var base = $('.base');
+
+    var checkContentSize = function (heights) {
+        if ($(window).height() < heights) {
+            base.removeClass('absolute').addClass('static');
         } else {
-            $('.base').addClass('absolute');
-            $('.base').removeClass('static');
+            base.removeClass('static').addClass('absolute');
         }
+    };
+
+    var mainPaddingTop    = parseInt($('main').css('padding-top').replace('px', ''));
+    var mainPaddingBottom = parseInt($('main').css('padding-bottom').replace('px', ''));
+
+    var sumHeights = function () {
+        return $('header').outerHeight() + mainPaddingTop + $('#apps').height() + mainPaddingBottom + $('footer').outerHeight();
+    };
+
+    checkContentSize(sumHeights());
+
+    $(window).resize(function () {
+        checkContentSize(sumHeights());
     });
 });
