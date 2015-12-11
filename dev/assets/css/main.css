@@ -12,10 +12,8 @@
 /*=====  End of Import  ======*/
 .base {
   background: #252525;
-  min-width: 1000px;
-  position: absolute;
-  top: 0;
-  bottom: 0; }
+  width: 100%;
+  min-width: 320px; }
 
 header,
 footer {
@@ -31,17 +29,8 @@ header .title {
   header .title h2 {
     font-size: 3.125em; }
 
-main,
-footer {
-  position: absolute;
-  top: 125px;
-  right: 0;
-  bottom: 0;
-  left: 0; }
-
 main {
-  padding-bottom: 40px;
-  bottom: 74px; }
+  padding-bottom: 40px; }
   main ul {
     width: 100%;
     display: table; }
@@ -131,11 +120,29 @@ main {
 footer {
   width: 100%;
   box-sizing: border-box;
-  display: table;
-  top: auto; }
+  display: table; }
   footer .copyright {
     font-size: 0.75em;
     line-height: 34px;
     float: left; }
   footer .logo {
     float: right; }
+
+.absolute.base {
+  position: absolute;
+  top: 0;
+  bottom: 0; }
+
+.absolute main,
+.absolute footer {
+  position: absolute;
+  top: 125px;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.absolute main {
+  bottom: 74px; }
+
+.absolute footer {
+  top: auto; }

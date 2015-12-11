@@ -9,7 +9,6 @@ var gulp          = require('gulp');
 var htmlValidator = require('gulp-html-validator');
 var sass          = require('gulp-sass');
 var jshint        = require('gulp-jshint');
-var jslint        = require('gulp-jslint');
 var browserSync   = require('browser-sync').create();
 var spawn         = require('child_process').spawn;
 var livereload    = require('gulp-livereload');
@@ -119,22 +118,13 @@ gulp.task('sass', function () {
 gulp.task('js', function () {
 
     return gulp.src(jsFiles)
-        .pipe(jshint())
-        .pipe(jslint({
-            node: true,
-            browser: true,
-            global: ['$']
-        }));
+        .pipe(jshint());
 });
 
 gulp.task('gulpfile', function () {
 
     return gulp.src(gulpFile)
-        .pipe(jshint())
-        .pipe(jslint({
-            node: true,
-            browser: true
-        }));
+        .pipe(jshint());
 });
 
 gulp.task('files', function () {
