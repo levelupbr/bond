@@ -123,6 +123,7 @@ gulp.task('js', function () {
         .pipe(jslint({
             node: true,
             browser: true,
+            es6: true,
             global: ['$']
         }));
 });
@@ -133,6 +134,7 @@ gulp.task('gulpfile', function () {
         .pipe(jshint())
         .pipe(jslint({
             node: true,
+            es6: true,
             browser: true
         }));
 });
