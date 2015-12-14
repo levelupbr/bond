@@ -2,6 +2,11 @@
 
 const mongoose = require('mongoose');
 
+let versionToNumber = function(version)
+{
+    return version.replace(/\./g,'');
+};
+
 let setStatus = function(status) {
     return { "open" : 0, "success": 1 }[status];
 };
@@ -29,7 +34,7 @@ versionSchema.methods.setVersion = function (version) {
         
     this.from = this.version;
     this.version = version;
-    this.downgrade = false;
+    this.downgrade = versionToNumber(this.version) < versionToNumber(this.from);
 };
 
 versionSchema.methods.downgradeVersion = function (version) {
