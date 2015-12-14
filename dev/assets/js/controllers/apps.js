@@ -6,6 +6,8 @@ function AppsController () {
     ===============================*/
     var requestModel = new RequestModel();
     var mapperModel  = new MapperModel();
+    var updaterModel = new UpdaterModel();
+    var dataView     = new DataView();
     /*=====  End of Imports  ======*/
 
 
@@ -30,14 +32,42 @@ function AppsController () {
     ========================================*/
     this.activateRequestApp = function (id) {
         requestModel.getAppData(id).then(function (appData) {
-        	var list = [];
+            var list = [];
 
-	        $.each(appData, function (i, app) {
-	            list.push(mapperModel.mapAppData(app));
-	        });
+            $.each(appData, function (i, app) {
+                list.push(mapperModel.mapAppData(app));
+            });
 
-	        new DataView(id, list);
+            dataView.addTemplate(id, list);
         });
     }
     /*=====  End of App data request  ======*/
+
+
+    /*=======================================
+    =            Updater control            =
+    =======================================*/
+    var services = [],
+        activeLines = 0;
+
+    this.activateServices = function (id) {
+        activeLines++;
+
+        services.push(id);
+
+        updaterModel.update(services, Date.now(), activeLines);
+    };
+
+    this.disabledRequestApp = function (id) {
+        activeLines--;
+
+        var index = services.indexOf(id);
+
+        if (services.indexOf(id) > -1)
+            services.splice(index, 1);
+
+        updaterModel.update(services, Date.now(), activeLines);
+        dataView.closeLine(id);
+    };
+    /*=====  End of Updater control  ======*/
 }
