@@ -8,6 +8,6 @@
 			<li class="clr-error">Com erro</li>
 			<li class="clr-warning">Downgrade</li>
 		</ul>
-		<div id="content"></div>
+		<div class="data-version"></div>
 	</div>
 </li>

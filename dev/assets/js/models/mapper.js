@@ -14,7 +14,7 @@ function MapperModel () {
             users     : data.count,
             success   : data.success,
             error     : data.error,
-            downgrade : data.downgrade
+            downgrade : data.downgrade !== 0 ? - data.downgrade : data.downgrade
         }
     };
 }

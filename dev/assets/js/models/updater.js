@@ -2,23 +2,20 @@ function UpdaterModel () {
     'use strict';
 
     var self = this,
-        updateTime = 1000,
         lastDate;
 
-    this.update = function (services, date, activeLines) {
-        lastDate = date;
-
-        if(activeLines === 0)
+    this.update = function (date) {
+        if(appsController.activeLines === 0)
             return;
 
         requestAnimationFrame(function () {
-            self.update(services, lastDate, activeLines);
+            self.update(date);
         });
 
-        if((Date.now() - lastDate) < updateTime)
+        if((Date.now() - lastDate) < settings.updateTime)
             return;
 
-        $.each(services, function (i, id) {
+        $.each(appsController.services, function (i, id) {
             appsController.activateRequestApp(id);
         });
 

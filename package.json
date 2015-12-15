@@ -22,6 +22,7 @@
   "homepage": "https://github.com/levelupbr/bond",
   "dependencies": {
     "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
     "express": "^4.3.13",
     "mongoose": "^4.2.9",
     "npmlog": "^2.0.0",

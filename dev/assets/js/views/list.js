@@ -1,22 +1,39 @@
-function ListView(appList) {
+function ListView() {
     'use strict';
 
-    $.each(appList, function (i, app) {
+    var appList,
+        content = '';
+
+    this.addTemplate = function (listInfo) {
+        appList = listInfo;
+
+        loadTemplate(0);
+    };
+
+    var loadTemplate = function (i) {
         $.get('./assets/js/views/list.tpl', function (template) {
-            $('#apps-list').append(Mustache.render(template, app));
-            addEventClick();
+            content += Mustache.render(template, appList[i]);
+
+            if(++i !== appList.length)
+                return loadTemplate(i);
+
+            $('#apps-list').html(content);
+            $('.application').bind('click', eventClick);
         });
-    });
+    };
 
-    var addEventClick = function () {
-        $('.application').click(function () {
-            var self = $(this);
+    var eventClick = function() {
+        var self = $(this);
 
-            if(self.next().is(':visible'))
-                return appsController.disabledRequestApp(self.attr('data-id'));
+        self.addClass('current');
 
-            appsController.activateRequestApp(self.attr('data-id'));
-            appsController.activateServices(self.attr('data-id'));
-        });
+        $('.application').unbind('click', eventClick);
+        setTimeout(function () { $('.application').bind('click', eventClick); }, settings.animationTime);
+
+        if(self.next().is(':visible'))
+            return appsController.disabledRequestApp(self.attr('data-id'));
+
+        appsController.activateRequestApp(self.attr('data-id'));
+        setTimeout(function () { appsController.activateServices(self.attr('data-id')); }, settings.animationTime);
     };
 }

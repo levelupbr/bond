@@ -1,14 +1,25 @@
 function AppsController () {
     'use strict';
 
+    var self = this;
+
     /*===============================
     =            Imports            =
     ===============================*/
-    var requestModel = new RequestModel();
-    var mapperModel  = new MapperModel();
-    var updaterModel = new UpdaterModel();
-    var dataView     = new DataView();
+    var behaviorView   = new BehaviorView();
+    var requestModel   = new RequestModel();
+    var mapperModel    = new MapperModel();
+    var updaterModel   = new UpdaterModel();
+    var ordinatorModel = new OrdinatorModel();
+    var listView       = new ListView();
     /*=====  End of Imports  ======*/
+
+
+    /*=================================
+    =            Bootstrap            =
+    =================================*/
+    behaviorView.checkContentSize();
+    /*=====  End of Bootstrap  ======*/
 
 
     /*=========================================
@@ -22,7 +33,9 @@ function AppsController () {
             list.push(mapperModel.mapAppList(app));
         });
 
-        new ListView(list);
+        ordinatorModel.ordination(list, 'name');
+
+        listView.addTemplate(ordinatorModel.listOrdered);
     });
     /*=====  End of Apps list request  ======*/
 
@@ -31,14 +44,22 @@ function AppsController () {
     =            App data request            =
     ========================================*/
     this.activateRequestApp = function (id) {
-        requestModel.getAppData(id).then(function (appData) {
+        behaviorView.checkContentSize();
+
+        requestModel.getAppData(id).then(function (data) {
             var list = [];
 
-            $.each(appData, function (i, app) {
+            if(!data[0]) {
+                var dataView = new DataView();
+                return dataView.addTemplate();
+            }
+
+            $.each(data, function (i, app) {
                 list.push(mapperModel.mapAppData(app));
             });
 
-            dataView.addTemplate(id, list);
+            var dataView = new DataView();
+            return dataView.addTemplate(list);
         });
     }
     /*=====  End of App data request  ======*/
@@ -47,27 +68,29 @@ function AppsController () {
     /*=======================================
     =            Updater control            =
     =======================================*/
-    var services = [],
-        activeLines = 0;
+    this.services    = [];
+    this.activeLines = 0;
 
     this.activateServices = function (id) {
-        activeLines++;
+        self.activeLines++;
 
-        services.push(id);
+        self.services.push(id);
 
-        updaterModel.update(services, Date.now(), activeLines);
+        updaterModel.update(Date.now());
     };
 
     this.disabledRequestApp = function (id) {
-        activeLines--;
+        self.activeLines--;
 
-        var index = services.indexOf(id);
+        var index = self.services.indexOf(id);
 
-        if (services.indexOf(id) > -1)
-            services.splice(index, 1);
+        if (self.services.indexOf(id) > -1)
+            self.services.splice(index, 1);
 
-        updaterModel.update(services, Date.now(), activeLines);
-        dataView.closeLine(id);
+        updaterModel.update(self.services, Date.now());
+
+        var dataView = new DataView();
+        dataView.closeLine();
     };
     /*=====  End of Updater control  ======*/
 }

@@ -1,41 +1,57 @@
 function DataView() {
     'use strict';
 
-    this.addTemplate = function (id, appData) {
-        $.each(appData, function (i, app) {
-            $.get('./assets/js/views/data.tpl', function (template) {
-                addDataInApp(Mustache.render(template, app), id);
-            });
+    var appData,
+        content = '',
+        empty = {version: '--', users: '--', success: '--', error: '--', downgrade: '--'};
+
+    this.addTemplate = function (appInfos) {
+        appData = appInfos;
+
+        if(!appInfos)
+            return loadEmptyTemplate();
+
+        loadTemplate(0);
+    };
+
+    var loadEmptyTemplate = function () {
+        $.get('./assets/js/views/data.tpl', function (template) {
+            $('.application.current').next().find('.data-version').html(Mustache.render(template, empty));
+
+            addDataInApp();
         });
     };
 
-    var addDataInApp = function (appData, id) {
-        $('#content').html('').append(appData);
+    var loadTemplate = function (i) {
+        $.get('./assets/js/views/data.tpl', function (template) {
+            content += Mustache.render(template, appData[i]);
 
-        $('.application').each(function (i, self) {
+            if(++i !== appData.length)
+                return loadTemplate(i);
 
-            if($(self).attr('data-id') !== id)
-                return;
+            $('.application.current').next().find('.data-version').html(content);
+            content = '';
 
-            differentiateVersions();
-            $(self).next().slideDown('fast');
+            addDataInApp();
         });
+    };
+
+    var addDataInApp = function () {
+        differentiateVersions();
+
+        $('.application.current').next().slideDown(settings.animationTime);
+        $('.application.current').removeClass('current');
     };
 
     var differentiateVersions = function () {
-        $('.data').each(function (i) {
+        $('.application.current').next().find('.data').each(function (i) {
             if(i % 2 === 0)
                 $(this).addClass('uneven');
         });
     };
 
-    this.closeLine = function (id) {
-        $('.application').each(function (i, self) {
-
-            if($(self).attr('data-id') !== id)
-                return;
-
-            $(self).next().slideUp('fast');
-        });
+    this.closeLine = function () {
+        $('.application.current').next().slideUp(settings.animationTime);
+        $('.application.current').removeClass('current');
     };
 }
