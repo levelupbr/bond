@@ -6,10 +6,13 @@ require('babel-core/register');
 =            Loaders            =
 ===============================*/
 var gulp          = require('gulp');
+var gulpsync      = require('gulp-sync')(gulp);
 var htmlValidator = require('gulp-html-validator');
 var sass          = require('gulp-sass');
 var jshint        = require('gulp-jshint');
 var browserSync   = require('browser-sync').create();
+var clean         = require('gulp-dest-clean');
+var htmlusemin    = require('gulp-usemin-html')
 var spawn         = require('child_process').spawn;
 var livereload    = require('gulp-livereload');
 var Jasmine       = require('gulp-jasmine');
@@ -21,12 +24,14 @@ var node;
 /*==================================
 =            References            =
 ==================================*/
-var htmlFiles = './dev/**/*.html';
-var sassFiles = './dev/assets/sass/**/*.scss';
-var jsFiles   = './dev/assets/js/**/*.js';
-var gulpFile  = './gulpfile.js';
+var devFolder  = './dev/';
+var distFolder = './dist/';
+var htmlFiles  = devFolder + '**/*.html';
+var sassFiles  = devFolder + 'assets/sass/**/*.scss';
+var jsFiles    = devFolder + 'assets/js/**/*.js';
+var gulpFile   = './gulpfile.js';
 
-var cssFolder         = './dev/assets/css';
+var cssFolder         = devFolder + '/assets/css';
 var validationFolder  = './validation';
 var syncFolder        = './';
 
@@ -83,6 +88,8 @@ gulp.task('dev', function () {
     gulp.watch(jsFiles).on('change', browserSync.reload);
 });
 
+gulp.task('dist', gulpsync.async(['clean', 'copy']));
+
 gulp.task('server', function () {
     if (node) {
         node.kill();
@@ -108,7 +115,6 @@ gulp.task('html', function () {
 });
 
 gulp.task('sass', function () {
-
     return gulp.src(sassFiles)
         .pipe(sass())
         .pipe(gulp.dest(cssFolder))
@@ -116,9 +122,25 @@ gulp.task('sass', function () {
 });
 
 gulp.task('js', function () {
-
     return gulp.src(jsFiles)
         .pipe(jshint());
+});
+
+gulp.task('clean', function () {
+    return gulp.src(distFolder)
+        .pipe(clean(distFolder));
+});
+
+gulp.task('copy', function () {
+    gulp.src(devFolder + 'assets/css/wizard/fonts/**/*.{eot,svg,ttf,woff,woff2}')
+        .pipe(gulp.dest(distFolder + 'assets/css/wizard/fonts/'));
+
+    gulp.src(devFolder + '.htaccess')
+        .pipe(gulp.dest(distFolder));
+});
+
+gulp.task('htmlusemin', function () {
+
 });
 
 gulp.task('gulpfile', function () {
