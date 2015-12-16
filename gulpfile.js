@@ -18,6 +18,7 @@ var clean         = require('gulp-dest-clean');
 var usemin        = require('gulp-usemin');
 var htmlmin       = require('gulp-htmlmin');
 var uglify        = require('gulp-uglify');
+var replace       = require('gulp-replace');
 var spawn         = require('child_process').spawn;
 var livereload    = require('gulp-livereload');
 var Jasmine       = require('gulp-jasmine');
@@ -173,6 +174,7 @@ gulp.task('scss-dist', function () {
 gulp.task('uglify', function () {
     return gulp.src(dist + 'assets/js/main.js')
         .pipe(uglify())
+        .pipe(replace(/http:\/\/localhost:8080\/api\/apps\//g, 'http://bond.levelup.com.br/api/apps/'))
         .pipe(gulp.dest(dist + 'assets/js'));
 });
 
