@@ -1,17 +1,36 @@
 function RequestModel () {
     'use strict';
 
-    var service = 'http://localhost:8080/api/apps/';
 
+    /*============================
+    =            Call            =
+    ============================*/
+    var service;
 
-    /*====================================
-    =            List request            =
-    ====================================*/
     this.getAppList = function () {
-        return new Promise(requestList);
+        service = settings.services;
+
+        return new Promise(request);
     };
 
-    var requestList = function (resolve, reject) {
+    this.getAppData = function (id) {
+        service = settings.services + id + '/stats';
+
+        return new Promise(request);
+    };
+
+    this.getTemplate = function (path) {
+        service = path;
+
+        return new Promise(request);
+    };
+    /*=====  End of Call  ======*/
+
+
+    /*===============================
+    =            Request            =
+    ===============================*/
+    var request = function (resolve, reject) {
         $.get(service)
         .success(function (data) {
             resolve(data);
@@ -20,28 +39,5 @@ function RequestModel () {
             reject(console.log(error));
         });
     };
-    /*=====  End of List request  ======*/
-
-
-    /*====================================
-    =            Request data            =
-    ====================================*/
-    var appId;
-
-    this.getAppData = function (id) {
-        appId = id;
-
-        return new Promise(requestData);
-    };
-
-    var requestData = function (resolve, reject) {
-        $.get(service + appId + '/stats')
-        .success(function (data) {
-            resolve(data);
-        })
-        .fail(function (error) {
-            reject(console.log(error));
-        });
-    };
-    /*=====  End of Request data  ======*/
+    /*=====  End of Request  ======*/
 }

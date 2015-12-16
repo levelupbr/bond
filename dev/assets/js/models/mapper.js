@@ -11,9 +11,9 @@ function MapperModel () {
     this.mapAppData = function (data) {
         return {
             version   : data.version,
-            users     : data.count,
+            users     : data.count  ,
             success   : data.success,
-            error     : data.error,
+            error     : data.error  ,
             downgrade : data.downgrade !== 0 ? - data.downgrade : data.downgrade
         }
     };

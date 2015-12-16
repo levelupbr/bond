@@ -11,7 +11,7 @@ function ListView() {
     };
 
     var loadTemplate = function (i) {
-        $.get('./assets/js/views/list.tpl', function (template) {
+        $.get(settings.templates.list, function (template) {
             content += Mustache.render(template, appList[i]);
 
             if(++i !== appList.length)

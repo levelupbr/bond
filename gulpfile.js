@@ -6,13 +6,18 @@ require('babel-core/register');
 =            Loaders            =
 ===============================*/
 var gulp          = require('gulp');
-var gulpsync      = require('gulp-sync')(gulp);
 var htmlValidator = require('gulp-html-validator');
-var sass          = require('gulp-sass');
+var scss          = require('gulp-sass');
+var concat        = require('gulp-concat');
 var jshint        = require('gulp-jshint');
 var browserSync   = require('browser-sync').create();
+var runSequence   = require('run-sequence');
+var del           = require('del');
+var fs            = require('fs');
 var clean         = require('gulp-dest-clean');
-var htmlusemin    = require('gulp-usemin-html')
+var usemin        = require('gulp-usemin');
+var htmlmin       = require('gulp-htmlmin');
+var uglify        = require('gulp-uglify');
 var spawn         = require('child_process').spawn;
 var livereload    = require('gulp-livereload');
 var Jasmine       = require('gulp-jasmine');
@@ -24,14 +29,14 @@ var node;
 /*==================================
 =            References            =
 ==================================*/
-var devFolder  = './dev/';
-var distFolder = './dist/';
-var htmlFiles  = devFolder + '**/*.html';
-var sassFiles  = devFolder + 'assets/sass/**/*.scss';
-var jsFiles    = devFolder + 'assets/js/**/*.js';
+var dev        = './dev/';
+var dist       = './dist/';
+
+var htmlFiles  = dev + '**/*.html';
+var scssFiles  = dev + 'assets/scss/**/*.scss';
+var jsFiles    = dev + 'assets/js/**/*.js';
 var gulpFile   = './gulpfile.js';
 
-var cssFolder         = devFolder + '/assets/css';
 var validationFolder  = './validation';
 var syncFolder        = './';
 
@@ -53,14 +58,14 @@ var reporter = new Reporter({
 gulp.task('default', function () {
     console.log('========================================================================');
     console.log('                                                                        ');
-    console.log('                         Use gulp web|api|dev                           ');
+    console.log('                         Use gulp web|api|watch                         ');
     console.log('                                                                        ');
     console.log('========================================================================');
 });
 
 gulp.task('web', function () {
     gulp.watch(htmlFiles, ['html']);
-    gulp.watch(sassFiles, ['sass']);
+    gulp.watch(scssFiles, ['scss']);
     gulp.watch(jsFiles,   ['js']);
     gulp.watch(gulpFile,  ['gulpfile']);
 });
@@ -73,14 +78,14 @@ gulp.task('api', ['hint', 'specs', 'server'], function () {
     gulp.watch(specs, ['specs']);
 });
 
-gulp.task('dev', function () {
+gulp.task('watch', function () {
 
     browserSync.init({
         server: syncFolder
     });
 
     gulp.watch(htmlFiles, ['html']);
-    gulp.watch(sassFiles, ['sass']);
+    gulp.watch(scssFiles, ['scss-dev']);
     gulp.watch(jsFiles,   ['js']);
     gulp.watch(gulpFile,  ['gulpfile']);
 
@@ -88,7 +93,10 @@ gulp.task('dev', function () {
     gulp.watch(jsFiles).on('change', browserSync.reload);
 });
 
-gulp.task('dist', gulpsync.async(['clean', 'copy']));
+gulp.task('dist', function () {
+
+    runSequence('clean', 'copy', 'usemin', 'minify', 'scss-dist', 'uglify');
+});
 
 gulp.task('server', function () {
     if (node) {
@@ -114,11 +122,10 @@ gulp.task('html', function () {
         .pipe(gulp.dest(validationFolder));
 });
 
-gulp.task('sass', function () {
-    return gulp.src(sassFiles)
-        .pipe(sass())
-        .pipe(gulp.dest(cssFolder))
-        .pipe(browserSync.stream());
+gulp.task('scss-dev', function () {
+    return gulp.src(dev + 'assets/scss/app/**/*.scss')
+        .pipe(scss())
+        .pipe(gulp.dest(dev + 'assets/css'));
 });
 
 gulp.task('js', function () {
@@ -127,20 +134,46 @@ gulp.task('js', function () {
 });
 
 gulp.task('clean', function () {
-    return gulp.src(distFolder)
-        .pipe(clean(distFolder));
+    return gulp.src(dist)
+        .pipe(clean(dist));
 });
 
 gulp.task('copy', function () {
-    gulp.src(devFolder + 'assets/css/wizard/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-        .pipe(gulp.dest(distFolder + 'assets/css/wizard/fonts/'));
+    gulp.src(dev + '.htaccess')
+        .pipe(gulp.dest(dist));
 
-    gulp.src(devFolder + '.htaccess')
-        .pipe(gulp.dest(distFolder));
+    gulp.src(dev + 'assets/css/wizard/fonts/**/*.{eot,svg,ttf,woff,woff2}')
+        .pipe(gulp.dest(dist + 'assets/css/wizard/fonts/'));
+
+    gulp.src(dev + 'assets/imgs/**/*')
+        .pipe(gulp.dest(dist + 'assets/imgs'));
+
+    gulp.src(dev + 'assets/templates/**/*')
+        .pipe(gulp.dest(dist + 'assets/templates'));
 });
 
-gulp.task('htmlusemin', function () {
+gulp.task('usemin', function () {
+    return gulp.src(htmlFiles)
+        .pipe(usemin())
+        .pipe(gulp.dest('./dist'));
+});
 
+gulp.task('minify', function() {
+  return gulp.src(dist + '**/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest(dist))
+});
+
+gulp.task('scss-dist', function () {
+    return gulp.src(dev + 'assets/scss/main.scss')
+        .pipe(scss({outputStyle: 'compressed'}))
+        .pipe(gulp.dest(dist + 'assets/css'));
+});
+
+gulp.task('uglify', function () {
+    return gulp.src(dist + 'assets/js/main.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(dist + 'assets/js'));
 });
 
 gulp.task('gulpfile', function () {

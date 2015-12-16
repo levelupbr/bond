@@ -2,8 +2,7 @@ function DataView() {
     'use strict';
 
     var appData,
-        content = '',
-        empty = {version: '--', users: '--', success: '--', error: '--', downgrade: '--'};
+        content = '';
 
     this.addTemplate = function (appInfos) {
         appData = appInfos;
@@ -15,15 +14,15 @@ function DataView() {
     };
 
     var loadEmptyTemplate = function () {
-        $.get('./assets/js/views/data.tpl', function (template) {
-            $('.application.current').next().find('.data-version').html(Mustache.render(template, empty));
+        $.get(settings.templates.data, function (template) {
+            $('.application.current').next().find('.data-version').html(Mustache.render(template, {version: settings.emptyData, users: settings.emptyData, success: settings.emptyData, error: settings.emptyData, downgrade: settings.emptyData}));
 
             addDataInApp();
         });
     };
 
     var loadTemplate = function (i) {
-        $.get('./assets/js/views/data.tpl', function (template) {
+        $.get(settings.templates.data, function (template) {
             content += Mustache.render(template, appData[i]);
 
             if(++i !== appData.length)
