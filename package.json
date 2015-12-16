@@ -6,6 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node --harmony ./server.js",
+    "postinstall" : "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,6 +36,7 @@
   "devDependencies": {
     "babel": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
+    "bower": "^1.7.1",
     "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
