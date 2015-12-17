@@ -1,16 +1,14 @@
 /*==============================
 =            Import            =
 ==============================*/
-@import './resources';
+@import './../libs/resources';
 /*=====  End of Import  ======*/
 
 
 .base {
 	background: $light-grey;
-	min-width: 1000px;
-	position: absolute;
-	top: 0;
-	bottom: 0;
+	width: 100%;
+	min-width: 320px;
 }
 
 header,
@@ -26,18 +24,8 @@ header .title {
 	h2 { font-size: 3.125em; }
 }
 
-main,
-footer {
-	position: absolute;
-	top: 125px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-
 main {
 	padding-bottom: 40px;
-	bottom: 74px;
 
 	ul {
 		width: 100%;
@@ -156,7 +144,6 @@ footer {
 	width: 100%;
 	box-sizing: border-box;
 	display: table;
-	top: auto;
 
 	.copyright {
 		font-size: 0.75em;
@@ -165,4 +152,22 @@ footer {
 	}
 
 	.logo { float: right; }
+}
+
+.absolute {
+	&.base {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+	}
+	main,
+	footer {
+		position: absolute;
+		top: 125px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	main { bottom: 74px; }
+	footer { top: auto; }
 }
