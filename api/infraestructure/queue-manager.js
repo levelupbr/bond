@@ -3,9 +3,10 @@
 const zmq = require('zmq'),
     log = require('npmlog'),
     publisher = zmq.socket('pub'),
+    port = 2533,
     subscriber = zmq.socket('sub');
 
-publisher.bind('tcp://*:5533', function (err) {
+publisher.bind('tcp://*:'+port, function (err) {
     if (!err)
         log.info('0MQ', 'Listening for zmq subscribers...');
     else
@@ -13,9 +14,9 @@ publisher.bind('tcp://*:5533', function (err) {
 });
 
 subscriber.subscribe("");
-subscriber.connect("tcp://localhost:5533");
+subscriber.connect("tcp://localhost:"+port);
 
-module.exports = { 
+module.exports = {
     publisher: publisher,
     subscriber: subscriber
 };

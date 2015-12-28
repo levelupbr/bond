@@ -7,18 +7,20 @@ let Control = function(versionId) {
 
     this.version = versionId;
     this.count = 0;
-    this.success = 0;
-    this.error = 0;
+    this.online = 0;
+    this.offline = 0;
+    this.inactive = 0;
     this.downgrade = 0;
-    
-    this.update = function(count, success, error)
+
+    this.update = function(count, online, offline, inactive)
     {
         this.count+=count;
-        this.success+=success;        
-        this.error+=error;
+        this.online+=online;
+        this.offline+=offline;
+        this.inactive+=inactive;
     };
 }  ;
-  
+
 let summarize = {
 
     result: [],
@@ -26,17 +28,17 @@ let summarize = {
     control: {},
     downgrade: {},
     selectedVersion: {},
-    
+
     getSelectedVersionId: function() {
         return this.selectedVersion._id.version;
     },
-    
+
     createControl: function(_versionId) {
         let versionId = _versionId||this.getSelectedVersionId();
         this.control[versionId] = new Control(versionId);
         this.result.push(this.control[versionId]);
     },
-    
+
     getControl: function(_versionId) {
         let versionId = _versionId||this.getSelectedVersionId();
         if ( ! this.control[versionId] )
@@ -44,15 +46,15 @@ let summarize = {
 
         return this.control[versionId];
     },
-    
+
     updateDowngrade: function() {
         if ( this.selectedVersion._id.from && this.selectedVersion.downgrade )
             this.getControl(this.selectedVersion._id.from).downgrade += this.selectedVersion.downgrade;
     },
-    
+
     update: function(version) {
         this.selectedVersion = version;
-        this.getControl().update(version.count,version.success,version.error);
+        this.getControl().update(version.count,version.online,version.offline, version.inactive);
         this.updateDowngrade();
     },
 
@@ -63,17 +65,17 @@ let summarize = {
         this.downgrade = {};
         this.selectedVersion = {};
     },
-    
+
     exec: function(data) {
         this.reset();
-        
+
         if (!data) return [];
         let self = this;
-        
+
         data.forEach(function(version){
             self.update(version);
         });
-        
+
         return this.result;
     }
 };
@@ -81,9 +83,9 @@ let summarize = {
 let getAppStatsById = {
 
     'execute': function (id) {
-      
+
         let defered = Q.defer();
-        
+
         Version.aggregate([
             {
                 $match: { appId: id }
@@ -92,7 +94,16 @@ let getAppStatsById = {
                 $project: {
                     version: '$version',
                     from: '$from',
-                    success: {
+                    online: {
+                        $cond: {
+                            if : {
+                                $eq: ['$status', 2]
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    },
+                    offline: {
                         $cond: {
                             if : {
                                 $eq: ['$status', 1]
@@ -101,7 +112,7 @@ let getAppStatsById = {
                             else: 0
                         }
                     },
-                    error: {
+                    inactive: {
                         $cond: {
                             if : {
                                 $eq: ['$status', 0]
@@ -130,13 +141,16 @@ let getAppStatsById = {
                     count: {
                         $sum: 1
                     },
-                    error: {
-                        $sum: '$error'
+                    inactive: {
+                        $sum: '$inactive'
                     },
-                    success: { 
-                        $sum: '$success'
+                    online: {
+                        $sum: '$online'
                     },
-                    downgrade: { 
+                    offline: {
+                        $sum: '$offline'
+                    },
+                    downgrade: {
                         $sum: '$downgrade'
                     }
                 }

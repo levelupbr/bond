@@ -10,10 +10,13 @@ let updateVersion = {
         let defered = Q.defer();
 
         Version.findOne({ appId: data.appId, hardwareId: data.hardwareId }, function (err, version) {
-            if (err||!version) version = new Version(data);
+            if (err||!version)
+              version = new Version(data);
+            else
+              version.addHistory();
 
             version.setVersion(data.version);
-            version.status = data.status;
+            version.setStatus(data.status);
             version.save(function(err, version) {
                 if (err) defered.reject(err);
                 else defered.resolve(version);

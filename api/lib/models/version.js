@@ -7,18 +7,16 @@ let versionToNumber = function(version)
     return version.replace(/\./g,'');
 };
 
-let setStatus = function(status) {
-    return { "open" : 0, "success": 1 }[status];
-};
-
 let versionSchema = new mongoose.Schema({
     'appId': String,
     'hardwareId': String,
+    'createdAt': { type: Date, default: Date.now },
     'version': String,
     'from': 'String',
-    'status': { type: Number, set: setStatus },
+    'status': { type: Number, default: 0 },
     'downgrade' : { type: Boolean, default: false },
-    'updated': { type: Date, default: Date.now }
+    'updated': { type: Date, default: Date.now },
+    'history' : [{}]
 });
 
 versionSchema.pre('save', function(next){
@@ -37,13 +35,32 @@ versionSchema.methods.setVersion = function (version) {
     this.downgrade = versionToNumber(this.version) < versionToNumber(this.from);
 };
 
+versionSchema.methods.setStatus = function (status) {
+    // 0: inactive, 1: offline: 2: online
+    let code = { "open" : this.status ? 1 : 0, "success": 2 }[status];
+    this.status = code;
+};
+
 versionSchema.methods.downgradeVersion = function (version) {
     this.setVersion(version);
     this.downgrade = true;
 };
 
+versionSchema.methods.addHistory = function () {
+
+    let history = {
+      'version': this.version,
+      'from': this.from,
+      'status': this.status,
+      'downgrade' : this.downgrade,
+      'updated': this.updated
+    };
+
+    this.history.push(history);
+};
+
 versionSchema.virtual('succeeded').get(function () {
-  return (this.status === 1);
+  return (this.status === 2);
 });
 
 module.exports = mongoose.model('Version', versionSchema);
