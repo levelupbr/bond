@@ -31,7 +31,7 @@ versionSchema.index({ appId: 1, hardwareId: 1}, { unique: true });
 versionSchema.methods.setVersion = function (version) {
     if ( this.version === version )
         return;
-        
+
     this.from = this.version;
     this.version = version;
     this.downgrade = versionToNumber(this.version) < versionToNumber(this.from);
@@ -41,5 +41,9 @@ versionSchema.methods.downgradeVersion = function (version) {
     this.setVersion(version);
     this.downgrade = true;
 };
+
+versionSchema.virtual('succeeded').get(function () {
+  return (this.status === 1);
+});
 
 module.exports = mongoose.model('Version', versionSchema);
