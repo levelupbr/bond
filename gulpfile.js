@@ -151,6 +151,9 @@ gulp.task('copy', function () {
 
     gulp.src(dev + 'assets/templates/**/*')
         .pipe(gulp.dest(app + 'assets/templates'));
+
+        gulp.src(dev + 'assets/audio/**/*')
+        .pipe(gulp.dest(app + 'assets/audio'));
 });
 
 gulp.task('usemin', function () {

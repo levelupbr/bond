@@ -36,10 +36,16 @@ main,
 footer {
   padding: 20px 40px; }
 
-header .title {
-  left: 0; }
-  header .title h2 {
-    font-size: 3.125em; }
+header {
+  position: relative; }
+  header .title {
+    left: 0; }
+    header .title h2 {
+      font-size: 3.125em; }
+    header .title audio {
+      position: absolute;
+      right: 20px;
+      bottom: 20px; }
 
 main {
   padding-bottom: 40px; }
