@@ -31,7 +31,7 @@ var node;
 =            References            =
 ==================================*/
 var dev        = './dev/';
-var dist       = './dist/';
+var app       = './app/';
 
 var htmlFiles  = dev + '**/*.html';
 var scssFiles  = dev + 'assets/scss/**/*.scss';
@@ -96,7 +96,7 @@ gulp.task('watch', function () {
 
 gulp.task('dist', function () {
 
-    runSequence('clean', 'copy', 'usemin', 'minify', 'scss-dist', 'uglify');
+    runSequence('clean', 'copy', 'usemin', 'minify', 'scss-app', 'uglify');
 });
 
 gulp.task('server', function () {
@@ -135,47 +135,47 @@ gulp.task('js', function () {
 });
 
 gulp.task('clean', function () {
-    return gulp.src(dist)
-        .pipe(clean(dist));
+    return gulp.src(app)
+        .pipe(clean(app));
 });
 
 gulp.task('copy', function () {
     gulp.src(dev + '.htaccess')
-        .pipe(gulp.dest(dist));
+        .pipe(gulp.dest(app));
 
     gulp.src(dev + 'assets/css/wizard/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-        .pipe(gulp.dest(dist + 'assets/css/wizard/fonts/'));
+        .pipe(gulp.dest(app + 'assets/css/wizard/fonts/'));
 
     gulp.src(dev + 'assets/imgs/**/*')
-        .pipe(gulp.dest(dist + 'assets/imgs'));
+        .pipe(gulp.dest(app + 'assets/imgs'));
 
     gulp.src(dev + 'assets/templates/**/*')
-        .pipe(gulp.dest(dist + 'assets/templates'));
+        .pipe(gulp.dest(app + 'assets/templates'));
 });
 
 gulp.task('usemin', function () {
     return gulp.src(htmlFiles)
         .pipe(usemin())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./app'));
 });
 
 gulp.task('minify', function() {
-  return gulp.src(dist + '**/*.html')
+  return gulp.src(app + '**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest(dist))
+    .pipe(gulp.dest(app))
 });
 
-gulp.task('scss-dist', function () {
+gulp.task('scss-app', function () {
     return gulp.src(dev + 'assets/scss/main.scss')
         .pipe(scss({outputStyle: 'compressed'}))
-        .pipe(gulp.dest(dist + 'assets/css'));
+        .pipe(gulp.dest(app + 'assets/css'));
 });
 
 gulp.task('uglify', function () {
-    return gulp.src(dist + 'assets/js/main.js')
+    return gulp.src(app + 'assets/js/main.js')
         .pipe(uglify())
         .pipe(replace(/http:\/\/localhost:8080\/api\/apps\//g, 'http://bond.levelup.com.br/api/apps/'))
-        .pipe(gulp.dest(dist + 'assets/js'));
+        .pipe(gulp.dest(app + 'assets/js'));
 });
 
 gulp.task('gulpfile', function () {

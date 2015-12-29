@@ -9,6 +9,7 @@ function MapperModel () {
     };
 
     this.mapAppData = function (data) {
+
         return {
             version   : data.version  || 0,
             users     : data.count    || 0,

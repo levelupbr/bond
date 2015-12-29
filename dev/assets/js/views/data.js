@@ -15,7 +15,7 @@ function DataView() {
 
     var loadEmptyTemplate = function () {
         $.get(settings.templates.data, function (template) {
-            $('.application.current').next().find('.data-version').html(Mustache.render(template, {version: settings.emptyData, users: settings.emptyData, success: settings.emptyData, error: settings.emptyData, downgrade: settings.emptyData}));
+            $('.application.current').next().find('.data-version').html(content);
 
             addDataInApp();
         });
@@ -29,8 +29,8 @@ function DataView() {
                 return loadTemplate(i);
 
             $('.application.current').next().find('.data-version').html(content);
-            content = '';
 
+            content = '';
             addDataInApp();
         });
     };
@@ -38,8 +38,7 @@ function DataView() {
     var addDataInApp = function () {
         differentiateVersions();
 
-        $('.application.current').next().slideDown(settings.animationTime);
-        $('.application.current').removeClass('current');
+        $('.application.current').next().slideDown(settings.animationTime).removeClass('current');
     };
 
     var differentiateVersions = function () {
@@ -50,7 +49,6 @@ function DataView() {
     };
 
     this.closeLine = function () {
-        $('.application.current').next().slideUp(settings.animationTime);
-        $('.application.current').removeClass('current');
+        $('.application.current').next().slideUp(settings.animationTime).removeClass('current');
     };
 }
