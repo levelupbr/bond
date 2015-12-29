@@ -18,10 +18,19 @@ header,
 main,
 footer { padding: 20px 40px; }
 
-header .title {
-	left: 0;
+header {
+	position: relative;
 
-	h2 { font-size: 3.125em; }
+	.title {
+		left: 0;
+
+		h2 { font-size: 3.125em; }
+		audio {
+			position: absolute;
+			right: 20px;
+			bottom: 20px;
+		}
+	}
 }
 
 main {
