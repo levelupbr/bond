@@ -39,7 +39,7 @@ var jsFiles    = dev + 'assets/js/**/*.js';
 var gulpFile   = './gulpfile.js';
 
 var validationFolder  = './validation';
-var syncFolder        = './';
+var syncFolder        = './dev/';
 
 var files = ['./server.js', './api/**/*.js'];
 var specs = ['./tests/**/*-specs.js'];
@@ -125,7 +125,7 @@ gulp.task('html', function () {
 
 gulp.task('scss-dev', function () {
     return gulp.src(dev + 'assets/scss/app/**/*.scss')
-        .pipe(scss())
+        .pipe(scss().sync().on('error', sass.logError))
         .pipe(gulp.dest(dev + 'assets/css'));
 });
 
@@ -167,7 +167,7 @@ gulp.task('minify', function() {
 
 gulp.task('scss-app', function () {
     return gulp.src(dev + 'assets/scss/main.scss')
-        .pipe(scss({outputStyle: 'compressed'}))
+        .pipe(scss({outputStyle: 'compressed'}).sync().on('error', sass.logError))
         .pipe(gulp.dest(app + 'assets/css'));
 });
 

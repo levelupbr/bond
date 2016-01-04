@@ -4,7 +4,7 @@
 var bondApp = bondApp || {
 
   settings: {
-    updateTime    : 5000
+    updateTime : 5000
   },
 
   /* infraestructure */
