@@ -82,13 +82,25 @@ let summarize = {
 
 let getAppStatsById = {
 
-    'execute': function (id) {
+    'execute': function (id, q) {
 
         let defered = Q.defer();
 
+        let match = { appId: id };
+
+        if ( q ) {
+
+          let date1 = new Date(q),
+            date2 = new Date(q);
+
+          date2.setDate(date2.getDate() + 1)
+          match.updated = { $gte: date1, $lt:  date2 }
+
+        }
+
         Version.aggregate([
             {
-                $match: { appId: id }
+                $match: match
             },
             {
                 $project: {

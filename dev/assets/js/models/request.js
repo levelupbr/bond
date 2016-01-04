@@ -14,7 +14,7 @@ function RequestModel () {
     };
 
     this.getAppData = function (id) {
-        service = settings.services + id + '/stats';
+        service = settings.services + id + '/stats' + location.search;
 
         return new Promise(request);
     };
