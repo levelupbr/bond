@@ -1,14 +1,7 @@
-/*==============================
-=            Import            =
-==============================*/
-@import './../libs/resources';
-/*=====  End of Import  ======*/
-
-
 .base {
 	background: $light-grey;
 	width: 100%;
-	min-width: 320px;
+	min-width: 1000px;
 }
 
 header,
@@ -67,14 +60,14 @@ main {
 		.content {
 			background: #333333;
 			border-radius: 0 0 4px 4px;
-			padding: 10px 0 20px;
+			padding: 10px 0 20px!important;
 			margin: 0 2px;
 			display: block;
-			height: 0;
+			// height: 0; temp
 			overflow: hidden;
 			padding: 0;
 			-webkit-transition: height 0.2s,  padding 0.2s; /* Safari */
-    	transition: height 0.2s, padding 0.2s;
+    		transition: height 0.2s, padding 0.2s;
 
 			ul {
 				width: auto;
@@ -122,7 +115,7 @@ main {
 				li {
 					text-align: center;
 					line-height: 40px;
-					width: 16.6%;
+					width: 20%;
 					padding-bottom: 0;
 					float: left;
 
@@ -134,6 +127,48 @@ main {
 						position: relative;
 						float: left;
 					}
+				}
+
+				li {
+					&.group {
+						width: 30%;
+						height: 100%;
+						border-left: 1px solid #666;
+						margin-left: -1px;
+						position: relative;
+
+						p {
+							font-size: .75em;
+							line-height: 40px;
+							margin: 0 20px;
+							float: left;
+
+							+ p { float: right }
+						}
+					}
+					.percent {
+						font-size: 1.5em;
+						line-height: 40px;
+
+						&:before,
+						&:after {
+							content: '';
+							background: rgba(255, 255, 255, .2);
+							width: 15%;
+							height: 1px;
+							position: absolute;
+							top: 50%;
+							left: 20%;
+						}
+						&:after {
+							right: 20%;
+							left: auto;
+						}
+					}
+
+					&.success { background: rgba( 54, 217, 0, .4); }
+
+					&.error   { background: rgba(255,   0, 0, .4); }
 				}
 			}
 		}

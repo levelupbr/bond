@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Bond</title>
-    <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
-    <link rel="icon" type="image/x-icon" href="assets/imgs/favicon.ico">
-
+    <link rel="icon" type="image/png" href="./assets/imgs/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./assets/imgs/favicon.ico">
     <!-- build:css assets/css/main.css -->
 	<link rel="stylesheet" href="./assets/css/reset.css">
 	<link rel="stylesheet" href="./assets/css/main.css">
@@ -22,6 +21,18 @@
 				<div class="title">
 					<h1>Monitorador de aplicações ></h1>
 					<h2 class="fnt-exo">Bond</h2>
+					<div class="filter">
+						<p>Filtar</p>
+						<fieldset>
+							<label for="start">De:</label>
+							<input type="date" id="start">
+						</fieldset>
+						<fieldset>
+							<label for="end">até:</label>
+							<input type="date" id="end">
+						</fieldset>
+						<input type="button">
+					</div>
 				</div>
 			</header>
 			<!-- Header -->
@@ -29,7 +40,80 @@
 			<!-- Main -->
 			<main>
 				<ul id="apps-list">
-
+					<li>
+			        	<button class="application fnt-exo closed" data-id="">Application</button>
+			        	<div class="content childrens-fnt-exo">
+			        		<ul class="categorys">
+			        			<li>Versão</li>
+			        			<li>Usuários</li>
+			        			<li class="group success">
+			        				<p>Online</p>
+			        				<p>Offline</p>
+			        			</li>
+			        			<li class="group error">
+			        				<p>Inativos</p>
+			        				<p>Downgrade</p>
+			        			</li>
+			        		</ul>
+			        		<ul class="data uneven">
+								<li>200</li>
+								<li>200</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+							</ul>
+							<ul class="data">
+								<li>200</li>
+								<li>200</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+							</ul>
+							<ul class="data uneven">
+								<li>200</li>
+								<li>200</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+							</ul>
+							<ul class="data deprecated">
+								<li>200</li>
+								<li>200</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+								<li class="group">
+									<p>200</p>
+			        				<p>200</p>
+			        				<div class="percent">86%</div>
+								</li>
+							</ul>
+			        		<div class="data-version"></div>
+			        	</div>
+			        </li>
 				</ul>
 			</main>
 			<!-- Main -->

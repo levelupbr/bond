@@ -7,7 +7,7 @@ require('babel-core/register');
 ===============================*/
 var gulp          = require('gulp');
 var htmlValidator = require('gulp-html-validator');
-var scss          = require('gulp-sass');
+var sass          = require('gulp-sass');
 var concat        = require('gulp-concat');
 var jshint        = require('gulp-jshint');
 var browserSync   = require('browser-sync').create();
@@ -124,9 +124,10 @@ gulp.task('html', function () {
 });
 
 gulp.task('scss-dev', function () {
-    return gulp.src(dev + 'assets/scss/app/**/*.scss')
-        .pipe(scss().sync().on('error', sass.logError))
-        .pipe(gulp.dest(dev + 'assets/css'));
+    return gulp.src(dev + 'assets/scss/main.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(dev + 'assets/css'))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('js', function () {
@@ -167,7 +168,7 @@ gulp.task('minify', function() {
 
 gulp.task('scss-app', function () {
     return gulp.src(dev + 'assets/scss/main.scss')
-        .pipe(scss({outputStyle: 'compressed'}).sync().on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest(app + 'assets/css'));
 });
 
