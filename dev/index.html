@@ -43,9 +43,43 @@
 
 		</div>
 
+    <script type="text/template" class="list-template">
+      <% _.each(apps, function(app)  { %>
+        <li>
+        	<button class="application fnt-exo closed" data-id="<%= app._id %>"><%= app.name %></button>
+        	<div class="content childrens-fnt-exo">
+        		<ul class="categorys">
+        			<li>Versão</li>
+        			<li>Usuários</li>
+        			<li class="clr-success">Online</li>
+        			<li>Offline</li>
+        			<li class="clr-error">Inativos</li>
+        			<li class="clr-warning">Downgrade</li>
+        		</ul>
+        		<div class="data-version"></div>
+        	</div>
+        </li>
+      <% }); %>
+    </script>
+
+    <script type="text/template" class="data-template">
+      <% _.each(versions, function(version, i)  { %>
+      <ul class="data <% if ( i % 2 === 0 ) {%>uneven<%}%>">
+      	<li><%= version.version %></li>
+      	<li><%= version.users %></li>
+      	<li><%= version.online %></li>
+      	<li><%= version.offline %></li>
+      	<li><%= version.inactive %></li>
+      	<li><%= version.downgrade %></li>
+      </ul>
+      <% }); %>
+    </script>
+
 		<!-- build:js assets/js/main.js -->
 		<script src="./../bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="./../bower_components/mustache.js/mustache.min.js"></script>
+    <script src="./../bower_components/underscore/underscore-min.js"></script>
+    <script src="./../bower_components/backbone/backbone-min.js"></script>
+		<!--<script src="./../bower_components/mustache.js/mustache.min.js"></script>
 		<script src="./assets/js/settings.js"></script>
 		<script src="./assets/js/views/behavior.js"></script>
 		<script src="./assets/js/views/list.js"></script>
@@ -55,7 +89,8 @@
 		<script src="./assets/js/models/updater.js"></script>
 		<script src="./assets/js/models/ordinator.js"></script>
 		<script src="./assets/js/controllers/apps.js"></script>
-		<script src="./assets/js/main.js"></script>
+		<script src="./assets/js/main.js"></script>-->
+    <script src="./assets/js/app.js"></script>
 		<!-- endbuild -->
 
 </body>

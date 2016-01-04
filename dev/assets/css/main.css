@@ -69,7 +69,13 @@ main {
       border-radius: 0 0 4px 4px;
       padding: 10px 0 20px;
       margin: 0 2px;
-      display: none; }
+      display: block;
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      -webkit-transition: height 0.2s,  padding 0.2s;
+      /* Safari */
+      transition: height 0.2s, padding 0.2s; }
       main ul .content ul {
         width: auto;
         height: 40px;
