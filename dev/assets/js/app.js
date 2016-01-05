@@ -29,10 +29,6 @@ bondApp.infraestructure.versionContainerUpdater = function(el) {
 };
 
 bondApp.infraestructure.footerBehavior = function () {
-
-	/*==========================================
-    =            Interface behavior            =
-    ==========================================*/
     var base = $('.base');
 
     var mainPaddingTop    = parseInt($('main').css('padding-top').replace('px', ''), 0),
@@ -52,8 +48,21 @@ bondApp.infraestructure.footerBehavior = function () {
     });
 
     checkContentSize();
+};
 
-    /*=====  End of Interface behavior  ======*/
+bondApp.infraestructure.setDateFilter = function () {
+    var date = new Date();
+
+    var day   = date.getDate(),
+        month = date.getMonth() + 1,
+        year  = date.getFullYear();
+
+    if (month < 10) month = '0' + month;
+    if (day   < 10) day   = '0' + day;
+
+    var today = year + '-' + month + '-' + day;
+
+    $('input[type=date]').val(today).attr('max', today);
 };
 
 bondApp.infraestructure.timer = {
@@ -146,6 +155,7 @@ bondApp.init = function() {
   new bondApp.views.AppsList();
   this.infraestructure.timer.run();
   this.infraestructure.footerBehavior();
+  this.infraestructure.setDateFilter();
 };
 
 bondApp.init();
