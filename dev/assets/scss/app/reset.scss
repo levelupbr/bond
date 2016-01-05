@@ -5,7 +5,9 @@
 li {
 	list-style: none;
 }
-button {
+input,
+button,
+fieldset {
     border: none;
     outline: none;
     cursor: pointer;

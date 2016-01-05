@@ -1,6 +1,6 @@
-/*==============================
-=            Import            =
-==============================*/
+/*===============================
+=            Imports            =
+===============================*/
 /*=================================
 =            Variables            =
 =================================*/
@@ -9,11 +9,24 @@
 =            Mixins            =
 ==============================*/
 /*=====  End of Mixins  ======*/
-/*=====  End of Import  ======*/
+* {
+  padding: 0;
+  margin: 0; }
+
+li {
+  list-style: none; }
+
+input,
+button,
+fieldset {
+  border: none;
+  outline: none;
+  cursor: pointer; }
+
 .base {
   background: #252525;
   width: 100%;
-  min-width: 320px; }
+  min-width: 1000px; }
 
 header,
 footer {
@@ -24,16 +37,74 @@ main,
 footer {
   padding: 20px 40px; }
 
-header {
-  position: relative; }
-  header .title {
-    left: 0; }
-    header .title h2 {
-      font-size: 3.125em; }
-    header .title audio {
-      position: absolute;
-      right: 20px;
-      bottom: 20px; }
+header .title {
+  left: 0; }
+  header .title h2 {
+    font-size: 3.125em; }
+  header .title form {
+    background: #333;
+    padding: 6px 10px;
+    margin-top: -46px;
+    float: right; }
+    header .title form fieldset {
+      float: left; }
+      header .title form fieldset label {
+        font-size: 14px;
+        color: #fff;
+        text-align: right;
+        line-height: 24px;
+        margin-right: 6px;
+        float: left; }
+      header .title form fieldset .field {
+        float: left; }
+        header .title form fieldset .field input {
+          font-size: 14px;
+          color: #fff;
+          width: 110px;
+          height: 24px;
+          position: relative; }
+          header .title form fieldset .field input::-webkit-datetime-edit {
+            text-align: center;
+            line-height: 24px;
+            background: #111;
+            height: 24px;
+            margin-right: 6px;
+            opacity: .7;
+            -webkit-transition: 0.2s;
+            -moz-transition: 0.2s;
+            -o-transition: 0.2s;
+            transition: 0.2s; }
+          header .title form fieldset .field input::-webkit-inner-spin-button {
+            display: none; }
+          header .title form fieldset .field input::-webkit-calendar-picker-indicator {
+            opacity: 0;
+            width: 86px;
+            height: 200%;
+            position: absolute;
+            top: -100%;
+            left: 0; }
+          header .title form fieldset .field input::-webkit-clear-button {
+            display: none; }
+          header .title form fieldset .field input:hover::-webkit-datetime-edit {
+            opacity: 1; }
+    header .title form input[type=button] {
+      background: url(./../imgs/filter.png);
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      float: right;
+      opacity: .7;
+      -webkit-transition: 0.2s;
+      -moz-transition: 0.2s;
+      -o-transition: 0.2s;
+      transition: 0.2s; }
+      header .title form input[type=button]:hover {
+        opacity: 1; }
+      header .title form input[type=button]:active {
+        margin: 3px 0 -1px; }
+      header .title form input[type=button][disabled] {
+        opacity: .1;
+        cursor: default; }
 
 main {
   padding-bottom: 40px; }
@@ -73,9 +144,14 @@ main {
     main ul .content {
       background: #333333;
       border-radius: 0 0 4px 4px;
-      padding: 10px 0 20px;
       margin: 0 2px;
-      display: none; }
+      display: block;
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      -webkit-transition: height 0.2s,  padding 0.2s;
+      /* Safari */
+      transition: height 0.2s, padding 0.2s; }
       main ul .content ul {
         width: auto;
         height: 40px;
@@ -109,7 +185,7 @@ main {
         main ul .content ul li {
           text-align: center;
           line-height: 40px;
-          width: 16.6%;
+          width: 20%;
           padding-bottom: 0;
           float: left; }
           main ul .content ul li .action {
@@ -119,6 +195,37 @@ main {
             box-sizing: border-box;
             position: relative;
             float: left; }
+        main ul .content ul li.group {
+          width: 30%;
+          height: 100%;
+          border-left: 1px solid #666;
+          margin-left: -1px;
+          position: relative; }
+          main ul .content ul li.group p {
+            font-size: .75em;
+            line-height: 40px;
+            margin: 0 20px;
+            float: left; }
+            main ul .content ul li.group p + p {
+              float: right; }
+        main ul .content ul li .percent {
+          font-size: 1.5em;
+          line-height: 40px; }
+          main ul .content ul li .percent:before, main ul .content ul li .percent:after {
+            content: '';
+            background: rgba(255, 255, 255, 0.2);
+            width: 15%;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: 20%; }
+          main ul .content ul li .percent:after {
+            right: 20%;
+            left: auto; }
+        main ul .content ul li.success {
+          background: rgba(54, 217, 0, 0.4); }
+        main ul .content ul li.error {
+          background: rgba(255, 0, 0, 0.4); }
     main ul .state {
       width: 50%;
       float: left; }
@@ -152,3 +259,5 @@ footer {
 
 .absolute footer {
   top: auto; }
+
+/*=====  End of Imports  ======*/
