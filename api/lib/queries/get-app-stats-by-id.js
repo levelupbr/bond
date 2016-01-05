@@ -93,8 +93,8 @@ let getAppStatsById = {
           let date1 = new Date(q),
             date2 = new Date(q);
 
-          date2.setDate(date2.getDate() + 1)
-          match.updated = { $gte: date1, $lt:  date2 }
+          date2.setDate(date2.getDate() + 1);
+          match.updated = { $gte: date1, $lt:  date2}
 
         }
 

@@ -5,6 +5,19 @@ const app = require('../infraestructure/app'),
     getAppStatsById = require('../lib/queries/get-app-stats-by-id'),
     getApps = require('../lib/queries/get-apps');
 
+let parseQuery = function(query) {
+  let q = query || false;
+  if ( ! q || q.indexOf(',') === -1 ) return q;
+
+  try {
+    return JSON.parse(q);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+
+};
+
 let apps = function() {
 
   app.post('/api/apps/', function(req, res){
@@ -26,7 +39,7 @@ let apps = function() {
   app.get('/api/apps/:id/stats', function(req, res) {
 
     let q = req.query.q || false;
-
+console.log(parseQuery(req.query.q));
     getAppStatsById.execute(req.params.id, q)
         .then(function(resp) {
             res.status(200).json(resp);
