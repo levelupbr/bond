@@ -1,0 +1,217 @@
+/*=================================
+=            Variables            =
+=================================*/
+/*=====  End of Variables  ======*/
+/*=============================
+=            Fonts            =
+=============================*/
+@font-face {
+  font-family: 'RobotoLight';
+  src: local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.eot');
+  src: local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.eot') format('embedded-opentype'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.woff2') format('woff2'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.woff') format('woff'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.ttf') format('truetype'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.svg#RobotoLight') format('svg');
+}
+@font-face {
+  font-family: 'ExoRegular';
+  src: local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.eot');
+  src: local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.eot') format('embedded-opentype'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.woff2') format('woff2'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.woff') format('woff'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.ttf') format('truetype'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.svg#ExoRegular') format('svg');
+}
+/*=====  End of Fonts  ======*/
+/*==============================
+=            Mixins            =
+==============================*/
+/*=====  End of Mixins  ======*/
+
+/*=============================
+=            Reset            =
+=============================*/
+/* line 4, dev/less/libs/reset.less */
+* {
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+}
+/* line 9, dev/less/libs/reset.less */
+li {
+  list-style: none;
+}
+/* line 10, dev/less/libs/reset.less */
+a {
+  text-decoration: none;
+}
+/* line 11, dev/less/libs/reset.less */
+button,
+input,
+textarea:focus {
+  background: transparent;
+  border: none;
+}
+/* line 17, dev/less/libs/reset.less */
+button {
+  outline: none;
+  cursor: pointer;
+}
+/* line 21, dev/less/libs/reset.less */
+input:focus,
+textarea:focus {
+  outline: none;
+}
+/*=====  End of Reset  ======*/
+
+/*===============================
+=            Imports            =
+===============================*/
+/*=================================
+=            Variables            =
+=================================*/
+/*=====  End of Variables  ======*/
+/*=============================
+=            Fonts            =
+=============================*/
+@font-face {
+  font-family: 'RobotoLight';
+  src: local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.eot');
+  src: local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.eot') format('embedded-opentype'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.woff2') format('woff2'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.woff') format('woff'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.ttf') format('truetype'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.svg#RobotoLight') format('svg');
+}
+@font-face {
+  font-family: 'ExoRegular';
+  src: local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.eot');
+  src: local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.eot') format('embedded-opentype'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.woff2') format('woff2'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.woff') format('woff'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.ttf') format('truetype'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.svg#ExoRegular') format('svg');
+}
+/*=====  End of Fonts  ======*/
+/*==============================
+=            Mixins            =
+==============================*/
+/*=====  End of Mixins  ======*/
+/*=====  End of Imports  ======*/
+/*============================
+=            Flex            =
+============================*/
+/* line 11, dev/less/app/layout.less */
+.flex-left {
+  display: flex;
+  align-items: stretch;
+}
+/* line 15, dev/less/app/layout.less */
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+/* line 20, dev/less/app/layout.less */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+/* line 25, dev/less/app/layout.less */
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+/* line 30, dev/less/app/layout.less */
+.flex-space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+/* line 35, dev/less/app/layout.less */
+.flex-auto {
+  display: flex;
+}
+/* line 38, dev/less/app/layout.less */
+.flex-auto > * {
+  flex: 1 1 auto;
+}
+/*=====  End of Flex  ======*/
+/*============================
+=            Grid            =
+============================*/
+/*=====  End of Grid  ======*/
+
+/*===============================
+=            Imports            =
+===============================*/
+/*=================================
+=            Variables            =
+=================================*/
+/*=====  End of Variables  ======*/
+/*=============================
+=            Fonts            =
+=============================*/
+@font-face {
+  font-family: 'RobotoLight';
+  src: local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.eot');
+  src: local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.eot') format('embedded-opentype'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.woff2') format('woff2'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.woff') format('woff'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.ttf') format('truetype'), local('RobotoLight'), url('wizard/fonts/RobotoLight/RobotoLight.svg#RobotoLight') format('svg');
+}
+@font-face {
+  font-family: 'ExoRegular';
+  src: local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.eot');
+  src: local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.eot') format('embedded-opentype'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.woff2') format('woff2'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.woff') format('woff'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.ttf') format('truetype'), local('ExoRegular'), url('wizard/fonts/ExoRegular/ExoRegular.svg#ExoRegular') format('svg');
+}
+/*=====  End of Fonts  ======*/
+/*==============================
+=            Mixins            =
+==============================*/
+/*=====  End of Mixins  ======*/
+/*=====  End of Imports  ======*/
+/*==================================
+=            Typography            =
+==================================*/
+/* line 11, dev/less/app/typography.less */
+.fnt-roboto,
+.childrens-fnt-roboto * {
+  font: 1em 'RobotoLight';
+}
+/* line 13, dev/less/app/typography.less */
+.fnt-exo,
+.childrens-fnt-exo * {
+  font: 1em 'ExoRegular';
+  color: #ffffff;
+  text-transform: uppercase;
+}
+/*=====  End of Typography  ======*/
+/*==============================
+=            Colors            =
+==============================*/
+/* line 25, dev/less/app/typography.less */
+.clr-light {
+  color: #ffffff;
+}
+/* line 26, dev/less/app/typography.less */
+.clr-standard {
+  color: #999999;
+}
+/* line 28, dev/less/app/typography.less */
+.clr-action {
+  color: #00c1ff;
+}
+/* line 29, dev/less/app/typography.less */
+.clr-success {
+  color: #17fe58;
+}
+/* line 30, dev/less/app/typography.less */
+.clr-warning {
+  color: #fff25d;
+}
+/* line 31, dev/less/app/typography.less */
+.clr-error {
+  color: #ff0000;
+}
+/* line 33, dev/less/app/typography.less */
+.bg-action {
+  background-color: #00c1ff;
+}
+/* line 34, dev/less/app/typography.less */
+.bg-success {
+  background-color: #17fe58;
+}
+/* line 35, dev/less/app/typography.less */
+.bg-warning {
+  background-color: #fff25d;
+}
+/* line 36, dev/less/app/typography.less */
+.bg-error {
+  background-color: #ff0000;
+}
+/*=====  End of Colors  ======*/

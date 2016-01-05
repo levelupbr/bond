@@ -31,7 +31,7 @@ var node;
 =            References            =
 ==================================*/
 var dev        = './dev/';
-var app       = './app/';
+var app        = './app/';
 
 var htmlFiles  = dev + '**/*.html';
 var scssFiles  = dev + 'assets/scss/**/*.scss';
@@ -39,7 +39,7 @@ var jsFiles    = dev + 'assets/js/**/*.js';
 var gulpFile   = './gulpfile.js';
 
 var validationFolder  = './validation';
-var syncFolder        = './dev/';
+var syncFolder        = './app/';
 
 var files = ['./server.js', './api/**/*.js'];
 var specs = ['./tests/**/*-specs.js'];
@@ -147,20 +147,17 @@ gulp.task('copy', function () {
     gulp.src(dev + 'assets/css/wizard/fonts/**/*.{eot,svg,ttf,woff,woff2}')
         .pipe(gulp.dest(app + 'assets/css/wizard/fonts/'));
 
+    gulp.src(dev + 'assets/css/wizard.css')
+        .pipe(gulp.dest(app + 'assets/css/'));
+
     gulp.src(dev + 'assets/imgs/**/*')
         .pipe(gulp.dest(app + 'assets/imgs'));
-
-    gulp.src(dev + 'assets/templates/**/*')
-        .pipe(gulp.dest(app + 'assets/templates'));
-
-        gulp.src(dev + 'assets/audio/**/*')
-        .pipe(gulp.dest(app + 'assets/audio'));
 });
 
 gulp.task('usemin', function () {
     return gulp.src(htmlFiles)
         .pipe(usemin())
-        .pipe(gulp.dest('./app'));
+        .pipe(gulp.dest(app));
 });
 
 gulp.task('minify', function() {
@@ -171,7 +168,7 @@ gulp.task('minify', function() {
 
 gulp.task('scss-app', function () {
     return gulp.src(dev + 'assets/scss/main.scss')
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}))
         .pipe(gulp.dest(app + 'assets/css'));
 });
 

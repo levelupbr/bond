@@ -52,7 +52,6 @@ bondApp.infraestructure.footerBehavior = function () {
 };
 
 bondApp.infraestructure.fixDate = function (date) {
-    console.log(date);
     var day   = date.getDate(),
         month = date.getMonth() + 1,
         year  = date.getFullYear();
