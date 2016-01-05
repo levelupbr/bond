@@ -35,7 +35,7 @@ let triggers = {
       defered.resolve(version);
     }
   }
-}
+};
 
 let postSave = {
 
