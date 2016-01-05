@@ -76,12 +76,12 @@
 				<li class="group">
 					<p><%= version.online %></p>
 					<p><%= version.offline %></p>
-					<div class="percent"><%= ((version.online + version.offline) / (version.count + version.downgrade)) * 100  %>%</div>
+					<div class="percent"><%= bondApp.helpers.calcPerc((version.online + version.offline),(version.count + version.downgrade))  %>%</div>
 				</li>
 				<li class="group">
 					<p><%= version.inactive %></p>
 					<p><%= version.downgrade %></p>
-					<div class="percent"><%= ((version.inactive + version.downgrade) / (version.count + version.downgrade)) * 100  %>%</div>
+					<div class="percent"><%= bondApp.helpers.calcPerc((version.inactive + version.downgrade),(version.count + version.downgrade))  %>%</div>
 				</li>
 			</ul>
 		<% }); %>

@@ -8,6 +8,8 @@ var bondApp = bondApp || {
         service: 'http://localhost:8080/api/apps/'
     },
 
+    helpers: {},
+
     /* infraestructure */
     infraestructure: {},
 
@@ -16,6 +18,10 @@ var bondApp = bondApp || {
 
     /* views */
     views: { }
+};
+
+bondApp.helpers.calcPerc = function(value, total){
+     return Math.round((value / total) * 100);
 };
 
 bondApp.infraestructure.changeButtonState = function (button) {
@@ -101,8 +107,8 @@ bondApp.models.VersionList = Backbone.Collection.extend({
         this.end   = options.end;
     },
     url: function () {
-        var params = '?q={%20"start":%20' + this.start + ',%20"end":%20' + this.end + '%20}'
-        return bondApp.settings.service + this.appId + '/stats' + params.replace(/-/g,'/');
+        var params = '?q={ "start": "' + this.start + '", "end":"' + this.end + '"}';
+        return bondApp.settings.service + this.appId + '/stats' + params.replace(/\-/g,'/');
     }
 });
 

@@ -38,8 +38,8 @@ let apps = function() {
 
   app.get('/api/apps/:id/stats', function(req, res) {
 
-    let q = req.query.q || false;
-console.log(parseQuery(req.query.q));
+    let q = parseQuery(req.query.q);
+
     getAppStatsById.execute(req.params.id, q)
         .then(function(resp) {
             res.status(200).json(resp);
