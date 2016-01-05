@@ -3,6 +3,10 @@
 const Q = require('q'),
   Version = require('./../models/version');
 
+String.prototype.toNumber = function() {
+    return this.replace(/\./g, '');
+};
+
 let Control = function(versionId) {
 
     this.version = versionId;
@@ -74,6 +78,13 @@ let summarize = {
 
         data.forEach(function(version){
             self.update(version);
+        });
+
+        this.result.sort(function(v1, v2) {
+            if ( v1.version.toNumber() < v2.version.toNumber )
+              return -1;
+
+            return 1;
         });
 
         return this.result;
