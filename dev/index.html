@@ -5,6 +5,7 @@
     <title>Bond</title>
     <link rel="icon" type="image/png" href="./assets/imgs/favicon.png">
     <link rel="icon" type="image/x-icon" href="./assets/imgs/favicon.ico">
+
     <!-- build:css assets/css/main.css -->
 	<link rel="stylesheet" href="./assets/css/reset.css">
 	<link rel="stylesheet" href="./assets/css/main.css">
@@ -21,21 +22,7 @@
 				<div class="title">
 					<h1>Monitorador de aplicações ></h1>
 					<h2 class="fnt-exo">Bond</h2>
-					<form>
-						<fieldset>
-							<label for="start">De:</label>
-							<div class="field">
-								<input type="date" max="" id="start">
-							</div>
-						</fieldset>
-						<fieldset>
-							<label for="end">até:</label>
-							<div class="field">
-								<input type="date" max="" id="end">
-							</div>
-						</fieldset>
-						<input type="button" value="" class="fnt-exo">
-					</form>
+					<form></form>
 				</div>
 			</header>
 			<!-- Header -->
@@ -43,80 +30,6 @@
 			<!-- Main -->
 			<main>
 				<ul id="apps-list">
-					<!-- <li>
-			        	<button class="application fnt-exo closed" data-id="">Application</button>
-			        	<div class="content childrens-fnt-exo">
-			        		<ul class="categorys">
-			        			<li>Versão</li>
-			        			<li>Usuários</li>
-			        			<li class="group success">
-			        				<p>Online</p>
-			        				<p>Offline</p>
-			        			</li>
-			        			<li class="group error">
-			        				<p>Inativos</p>
-			        				<p>Downgrade</p>
-			        			</li>
-			        		</ul>
-			        		<ul class="data uneven">
-								<li>200</li>
-								<li>200</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-							</ul>
-							<ul class="data">
-								<li>200</li>
-								<li>200</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-							</ul>
-							<ul class="data uneven">
-								<li>200</li>
-								<li>200</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-							</ul>
-							<ul class="data deprecated">
-								<li>200</li>
-								<li>200</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-								<li class="group">
-									<p>200</p>
-			        				<p>200</p>
-			        				<div class="percent">86%</div>
-								</li>
-							</ul>
-			        		<div class="data-version"></div>
-			        	</div>
-			        </li> -->
 				</ul>
 			</main>
 			<!-- Main -->
@@ -172,6 +85,22 @@
 				</li>
 			</ul>
 		<% }); %>
+    </script>
+
+    <script type="text/template" class="date-filter-template">
+		<fieldset>
+			<label>De:</label>
+			<div class="field">
+				<input type="date" id="start">
+			</div>
+		</fieldset>
+		<fieldset>
+			<label>até:</label>
+			<div class="field">
+				<input type="date" id="end">
+			</div>
+		</fieldset>
+		<input type="button" value="" id="submit" class="fnt-exo" disabled>
     </script>
 
 	<!-- build:js assets/js/main.js -->

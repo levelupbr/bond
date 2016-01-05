@@ -83,6 +83,10 @@ header .title {
 
 			&:hover  { opacity: 1; }
 			&:active { margin: 3px 0 -1px; }
+			&[disabled] {
+				opacity: .1;
+				cursor: default;
+			}
 		}
 	}
 }

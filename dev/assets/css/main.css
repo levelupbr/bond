@@ -102,6 +102,9 @@ header .title {
         opacity: 1; }
       header .title form input[type=button]:active {
         margin: 3px 0 -1px; }
+      header .title form input[type=button][disabled] {
+        opacity: .1;
+        cursor: default; }
 
 main {
   padding-bottom: 40px; }
