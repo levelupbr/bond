@@ -21,18 +21,21 @@
 				<div class="title">
 					<h1>Monitorador de aplicações ></h1>
 					<h2 class="fnt-exo">Bond</h2>
-					<div class="filter">
-						<p>Filtar</p>
+					<form>
 						<fieldset>
 							<label for="start">De:</label>
-							<input type="date" id="start">
+							<div class="field">
+								<input type="date" id="start">
+							</div>
 						</fieldset>
 						<fieldset>
 							<label for="end">até:</label>
-							<input type="date" id="end">
+							<div class="field">
+								<input type="date" id="end">
+							</div>
 						</fieldset>
-						<input type="button">
-					</div>
+						<input type="button" value="" class="fnt-exo">
+					</form>
 				</div>
 			</header>
 			<!-- Header -->
@@ -40,7 +43,7 @@
 			<!-- Main -->
 			<main>
 				<ul id="apps-list">
-					<li>
+					<!-- <li>
 			        	<button class="application fnt-exo closed" data-id="">Application</button>
 			        	<div class="content childrens-fnt-exo">
 			        		<ul class="categorys">
@@ -113,7 +116,7 @@
 							</ul>
 			        		<div class="data-version"></div>
 			        	</div>
-			        </li>
+			        </li> -->
 				</ul>
 			</main>
 			<!-- Main -->
@@ -137,10 +140,14 @@
         		<ul class="categorys">
         			<li>Versão</li>
         			<li>Usuários</li>
-        			<li class="clr-success">Online</li>
-        			<li>Offline</li>
-        			<li class="clr-error">Inativos</li>
-        			<li class="clr-warning">Downgrade</li>
+        			<li class="group success">
+        				<p>Online</p>
+        				<p>Offline</p>
+        			</li>
+        			<li class="group error">
+        				<p>Inativos</p>
+        				<p>Downgrade</p>
+        			</li>
         		</ul>
         		<div class="data-version"></div>
         	</div>
@@ -149,16 +156,22 @@
     </script>
 
     <script type="text/template" class="data-template">
-      <% _.each(versions, function(version, i)  { %>
-      <ul class="data <% if ( i % 2 === 0 ) {%>uneven<%}%>">
-      	<li><%= version.version %></li>
-      	<li><%= version.users %></li>
-      	<li><%= version.online %></li>
-      	<li><%= version.offline %></li>
-      	<li><%= version.inactive %></li>
-      	<li><%= version.downgrade %></li>
-      </ul>
-      <% }); %>
+		<% _.each(versions, function(version, i)  { %>
+			<ul class="data <% if ( i % 2 === 0 ) {%>uneven<%}%>">
+				<li><%= version.version %></li>
+				<li><%= version.count + version.downgrade %></li>
+				<li class="group">
+					<p><%= version.online %></p>
+					<p><%= version.offline %></p>
+					<div class="percent"><%= ((version.online + version.offline) / (version.count + version.downgrade)) * 100  %>%</div>
+				</li>
+				<li class="group">
+					<p><%= version.inactive %></p>
+					<p><%= version.downgrade %></p>
+					<div class="percent"><%= ((version.inactive + version.downgrade) / (version.count + version.downgrade)) * 100  %>%</div>
+				</li>
+			</ul>
+		<% }); %>
     </script>
 
 	<!-- build:js assets/js/main.js -->

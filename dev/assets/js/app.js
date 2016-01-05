@@ -148,4 +148,4 @@ bondApp.init = function() {
   this.infraestructure.footerBehavior();
 };
 
-// bondApp.init();
+bondApp.init();

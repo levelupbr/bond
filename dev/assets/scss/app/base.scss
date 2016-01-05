@@ -15,6 +15,76 @@ header .title {
 	left: 0;
 
 	h2 { font-size: 3.125em; }
+
+	form {
+		background: #333;
+		padding: 6px 10px;
+		margin-top: -46px;
+		float: right;
+
+		fieldset {
+			float: left;
+
+			label {
+				font-size: 14px;
+				color: #fff;
+				text-align: right;
+				line-height: 24px;
+				margin-right: 6px;
+				float: left;
+			}
+
+			.field {
+				float: left;
+
+				input {
+					font-size: 14px;
+					color: #fff;
+					width: 110px;
+					height: 24px;
+					position: relative;
+
+					&::-webkit-datetime-edit {
+						text-align: center;
+						line-height: 24px;
+						background: #111;
+						height: 24px;
+						margin-right: 6px;
+						opacity: .7;
+						@include transition();
+					}
+
+					&::-webkit-inner-spin-button { display: none; }
+
+					&::-webkit-calendar-picker-indicator {
+						opacity: 0;
+						width: 86px;
+						height: 200%;
+						position: absolute;
+						top: -100%;
+						left: 0;
+					}
+
+					&::-webkit-clear-button { display: none; }
+
+					&:hover::-webkit-datetime-edit { opacity: 1; }
+				}
+			}
+		}
+
+		input[type=button] {
+			background: url(#{$assets-path}imgs/filter.png);
+			width: 20px;
+			height: 20px;
+			margin-top: 2px;
+			float: right;
+			opacity: .7;
+			@include transition();
+
+			&:hover  { opacity: 1; }
+			&:active { margin: 3px 0 -1px; }
+		}
+	}
 }
 
 main {
@@ -60,10 +130,9 @@ main {
 		.content {
 			background: #333333;
 			border-radius: 0 0 4px 4px;
-			padding: 10px 0 20px!important;
 			margin: 0 2px;
 			display: block;
-			// height: 0; temp
+			height: 0;
 			overflow: hidden;
 			padding: 0;
 			-webkit-transition: height 0.2s,  padding 0.2s; /* Safari */
