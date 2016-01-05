@@ -203,6 +203,8 @@ main {
 				}
 
 				li {
+					position: relative;
+
 					&.group {
 						width: 30%;
 						height: 100%;
@@ -221,7 +223,13 @@ main {
 					}
 					.percent {
 						font-size: 1.5em;
+						text-align: center;
 						line-height: 40px;
+						position: absolute;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
 
 						&:before,
 						&:after {

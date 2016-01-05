@@ -39,7 +39,7 @@ var jsFiles    = dev + 'assets/js/**/*.js';
 var gulpFile   = './gulpfile.js';
 
 var validationFolder  = './validation';
-var syncFolder        = './app/';
+var syncFolder        = './dev/';
 
 var files = ['./server.js', './api/**/*.js'];
 var specs = ['./tests/**/*-specs.js'];
