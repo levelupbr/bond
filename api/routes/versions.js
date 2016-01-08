@@ -21,12 +21,11 @@ let version = function() {
     if ( ! isValidAction(action) )
         return res.status(400).json({ 'message': action + ' isn\'t a valid action'});
 
-    data.version.ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
     getAppById.execute(appId)
         .then(function(){
             publisher.send(JSON.stringify({
                 'action': action,
-                'versionInfo': { 'appId': appId, 'hardwareId': data['hardware-id'], 'version': data.version, status: data.action },
+                'versionInfo': { 'appId': appId, 'hardwareId': data['hardware-id'], 'version': data.version, status: data.action, ip:  req.headers['x-real-ip'] || req.connection.remoteAddress },
                 'date': new Date()
             }));
 
