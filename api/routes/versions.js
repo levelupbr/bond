@@ -21,7 +21,7 @@ let version = function() {
     if ( ! isValidAction(action) )
         return res.status(400).json({ 'message': action + ' isn\'t a valid action'});
 
-    data.version.ip = , ip: req.headers['x-real-ip'] || req.connection.remoteAddress;
+    data.version.ip = ip: req.headers['x-real-ip'] || req.connection.remoteAddress;
     getAppById.execute(appId)
         .then(function(){
             publisher.send(JSON.stringify({
