@@ -13,6 +13,7 @@ let versionSchema = new mongoose.Schema({
     'createdAt': { type: Date, default: Date.now },
     'version': String,
     'from': 'String',
+    'ip' : { type: String, default: '' },
     'status': { type: Number, default: 0 },
     'downgrade' : { type: Boolean, default: false },
     'updated': { type: Date, default: Date.now },
@@ -53,7 +54,8 @@ versionSchema.methods.addHistory = function () {
       'from': this.from,
       'status': this.status,
       'downgrade' : this.downgrade,
-      'updated': this.updated
+      'updated': this.updated,
+      'ip' : this.ip
     };
 
     this.history.push(history);
