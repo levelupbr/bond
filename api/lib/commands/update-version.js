@@ -15,6 +15,7 @@ let updateVersion = {
             else
               version.addHistory();
 
+            version.ip = data.ip;
             version.setVersion(data.version);
             version.setStatus(data.status);
             version.save(function(err, version) {
