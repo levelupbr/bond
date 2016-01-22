@@ -4,7 +4,7 @@ const app = require('../infraestructure/app.js'),
     publisher = require('../infraestructure/queue-manager.js').publisher,
     getAppById = require('../lib/queries/get-app-by-id');
 
-const actions =  ['open', 'success', 'downgrade'];
+const actions =  ['open', 'success', 'downgrade', 'repair', 'try-connect', 'closed'];
 
 let isValidAction = function(action) {
     return (actions.indexOf(action) !== -1);
@@ -25,7 +25,7 @@ let version = function() {
         .then(function(){
             publisher.send(JSON.stringify({
                 'action': action,
-                'versionInfo': { 'appId': appId, 'hardwareId': data['hardware-id'], 'version': data.version, status: data.action, ip:  req.headers['x-real-ip'] || req.connection.remoteAddress },
+                'versionInfo': { 'appId': appId, 'hardwareId': data['hardware-id'], 'version': data.version, status: data.action, data: data.data || {}, ip:  req.headers['x-real-ip'] || req.connection.remoteAddress },
                 'date': new Date()
             }));
 

@@ -15,6 +15,7 @@ let versionSchema = new mongoose.Schema({
     'from': 'String',
     'ip' : { type: String, default: '' },
     'status': { type: Number, default: 0 },
+    'data': { type: mongoose.Schema.Types.Mixed },
     'downgrade' : { type: Boolean, default: false },
     'updated': { type: Date, default: Date.now },
     'history' : [{}]
@@ -38,7 +39,7 @@ versionSchema.methods.setVersion = function (version) {
 
 versionSchema.methods.setStatus = function (status) {
     // 0: inactive, 1: offline: 2: online
-    let code = { "open" : this.status ? 1 : 0, "success": 2 }[status];
+    let code = { "open" : this.status ? 1 : 0, "success": 2, "repair": 3, "try-connect": 4, "closed" : 5 }[status];
     this.status = code;
 };
 
@@ -55,7 +56,8 @@ versionSchema.methods.addHistory = function () {
       'status': this.status,
       'downgrade' : this.downgrade,
       'updated': this.updated,
-      'ip' : this.ip
+      'ip' : this.ip,
+      'data': this.data
     };
 
     this.history.push(history);

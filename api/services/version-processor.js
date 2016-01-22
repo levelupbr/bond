@@ -19,7 +19,7 @@ let versionProcessor = function() {
                 postSave.execute(version);
             })
             .catch(function(err) {
-                log.error('0MQ','error on %s', data);
+                log.error('0MQ','error on %s', data, err, command);
             });
     });
 };

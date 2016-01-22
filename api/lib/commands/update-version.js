@@ -18,6 +18,7 @@ let updateVersion = {
             version.ip = data.ip;
             version.setVersion(data.version);
             version.setStatus(data.status);
+            version.data = data.data;
             version.save(function(err, version) {
                 if (err) defered.reject(err);
                 else defered.resolve(version);
