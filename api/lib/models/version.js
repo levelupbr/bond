@@ -40,6 +40,10 @@ versionSchema.methods.setVersion = function (version) {
 versionSchema.methods.setStatus = function (status) {
     // 0: inactive, 1: offline: 2: online
     let code = { "open" : this.status ? 1 : 0, "success": 2, "repair": 3, "try-connect": 4, "closed" : 5 }[status];
+
+    if ( code === 5 && (this.status === 3 || this.status === 4) )
+        return;
+
     this.status = code;
 };
 
