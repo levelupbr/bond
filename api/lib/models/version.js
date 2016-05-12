@@ -18,6 +18,8 @@ let versionSchema = new mongoose.Schema({
     'data': { type: mongoose.Schema.Types.Mixed },
     'downgrade' : { type: Boolean, default: false },
     'updated': { type: Date, default: Date.now },
+    'osVersion' : { type: String, default: '' },
+    'dotnetVersions' : { type: String, default: '' },
     'history' : [{}]
 });
 
