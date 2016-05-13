@@ -1,7 +1,6 @@
 'use strict';
 
 const   Q  = require('q'),
-        FS = require('fs'),
         Version = require('./../models/version');
 
 
@@ -112,7 +111,7 @@ let getAppStatsById = {
 
         }
 
-        Version.aggregate([
+        var q = Version.aggregate([
             {
                 $match: match
             },
@@ -181,9 +180,11 @@ let getAppStatsById = {
                     }
                 }
             }
-        ]).exec(function(err, result){
+        ]);
+        q.options = { allowDiskUse : true};
+
+        q.exec(function(err, result){
             if (err) return defered.reject(err);
-            FS.appendFile('bond-log.txt', JSON.stringify(result), function(err){});
             defered.resolve(summarize.exec(result));
         });
 

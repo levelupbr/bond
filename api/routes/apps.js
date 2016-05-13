@@ -38,8 +38,6 @@ let apps = function() {
 
   app.get('/api/apps/:id/stats', function(req, res) {
 
-    require('fs').appendFile('req-log.txt', 'oi', function(err){});
-
     let q = parseQuery(req.query.q);
 
     getAppStatsById.execute(req.params.id, q)
