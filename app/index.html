@@ -1,47 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Bond</title><link rel="icon" type="image/png" href="./assets/imgs/favicon.png"><link rel="icon" type="image/x-icon" href="./assets/imgs/favicon.ico"><link rel="stylesheet" href="./assets/css/main.css"><link rel="stylesheet" href="./assets/css/wizard.css"></head><body><div class="base childrens-fnt-roboto clr-standard"><!-- Header --><header><div class="title"><h1>Monitorador de aplicações ></h1><h2 class="fnt-exo">Bond</h2><form></form></div></header><!-- Header --><!-- Main --><main><ul id="apps-list"></ul></main><!-- Main --><!-- Footer --><footer><p class="copyright">Copyright Level up games</p><a href="http://levelupgames.uol.com.br/levelup/" target="_blank" class="logo"><img src="assets/imgs/level-up.png" height="30" width="70" alt="Level Up"></a></footer><!-- Footer --></div><script type="text/template" class="list-template"><% _.each(apps, function(app)  { %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bond</title>
+    <link rel="icon" type="image/png" href="./assets/imgs/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./assets/imgs/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/wizard.css">
+</head>
+<body>
+    <div class="base childrens-fnt-roboto clr-standard">
+        <!-- Header -->
+        <header>
+            <div class="title">
+                <h1>Monitorador de aplicações ></h1>
+                <h2 class="fnt-exo">Bond</h2>
+                <form></form>
+            </div>
+        </header>
+        <!-- Header -->
+        <!-- Main -->
+        <main><ul id="apps-list"></ul></main>
+        <!-- Main -->
+        <!-- Footer -->
+        <footer>
+            <p class="copyright">Copyright Level up games</p>
+            <a href="http://levelupgames.uol.com.br/levelup/" target="_blank" class="logo">
+                <img src="assets/imgs/level-up.png" height="30" width="70" alt="Level Up"></a>
+        </footer>
+        <!-- Footer -->
+    </div>
+    <script type="text/template" class="list-template">
+        <% _.each(apps, function(app)  { %>
         <li>
-        	<button class="application fnt-exo closed" data-id="<%= app._id %>"><%= app.name %></button>
-        	<div class="content childrens-fnt-exo">
-        		<ul class="categorys">
-        			<li>Versão</li>
-        			<li>Usuários</li>
-        			<li class="group success">
-        				<p>Online</p>
-        				<p>Offline</p>
-        			</li>
-        			<li class="group error">
-        				<p>Inativos</p>
-        				<p>Downgrade</p>
-        			</li>
-        		</ul>
-        		<div class="data-version"></div>
-        	</div>
+            <button class="application fnt-exo closed" data-id="<%= app._id %>"><%= app.name %></button>
+            <div class="content childrens-fnt-exo">
+                <ul class="categorys">
+                    <li>Versão</li>
+                    <li>Usuários</li>
+                    <li class="group success">
+                        <p>Online</p>
+                        <p>Offline</p>
+                    </li>
+                    <li class="group error">
+                        <p>Inativos</p>
+                        <p>Downgrade</p>
+                    </li>
+                </ul>
+                <div class="data-version"></div>
+            </div>
         </li>
-      <% }); %></script><script type="text/template" class="data-template"><% _.each(versions, function(version, i)  { %>
+        <% }); %>
+    </script>
+    <script type="text/template" class="data-template">
+        <% _.each(versions, function(version, i)  { %>
 			<ul class="data <% if ( i % 2 === 0 ) {%>uneven<%}%>">
-				<li><%= version.version %></li>
-				<li><%= version.count + version.downgrade %></li>
-				<li class="group">
-					<p><%= version.online %></p>
-					<p><%= version.offline %></p>
-					<div class="percent"><%= bondApp.helpers.calcPerc((version.online + version.offline),(version.count + version.downgrade))  %>%</div>
-				</li>
-				<li class="group">
-					<p><%= version.inactive %></p>
-					<p><%= version.downgrade %></p>
-					<div class="percent"><%= bondApp.helpers.calcPerc((version.inactive + version.downgrade),(version.count + version.downgrade))  %>%</div>
-				</li>
-			</ul>
-		<% }); %></script><script type="text/template" class="date-filter-template"><fieldset>
-			<label>De:</label>
-			<div class="field">
-				<input type="date" id="start">
-			</div>
-		</fieldset>
-		<fieldset>
-			<label>até:</label>
-			<div class="field">
-				<input type="date" id="end">
-			</div>
-		</fieldset>
-		<input type="button" value="" id="submit" class="fnt-exo" disabled></script><script src="assets/js/main.js"></script></body></html>
+                <li><%= version.version %></li>
+                <li><%= version.count + version.downgrade %></li>
+                <li class="group">
+                    <p><%= version.online %></p>
+                    <p><%= version.offline %></p>
+                    <div class="percent"><%= bondApp.helpers.calcPerc((version.online + version.offline),(version.count + version.downgrade))  %>%</div>
+                </li>
+                <li class="group">
+                    <p><%= version.inactive %></p>
+                    <p><%= version.downgrade %></p>
+                    <div class="percent"><%= bondApp.helpers.calcPerc((version.inactive + version.downgrade),(version.count + version.downgrade))  %>%</div>
+                </li>
+            </ul>
+        <% }); %>
+    </script>
+    <script type="text/template" class="date-filter-template">
+        <fieldset>
+            <label>De:</label>
+            <div class="field">
+                <input type="date" id="start">
+            </div>
+        </fieldset>
+        <fieldset>
+            <label>até:</label>
+            <div class="field">
+                <input type="date" id="end">
+            </div>
+        </fieldset>
+        <input type="button" value="" id="submit" class="fnt-exo" disabled>
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

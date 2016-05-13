@@ -1,7 +1,10 @@
 'use strict';
 
-const Q = require('q'),
-  Version = require('./../models/version');
+const   Q  = require('q'),
+        FS = require('fs'),
+        Version = require('./../models/version');
+
+
 
 String.prototype.toNumber = function() {
     return this.replace(/\./g, '');
@@ -180,6 +183,7 @@ let getAppStatsById = {
             }
         ]).exec(function(err, result){
             if (err) return defered.reject(err);
+            FS.appendFile('bond-log.txt', JSON.stringify(result), function(err){});
             defered.resolve(summarize.exec(result));
         });
 
