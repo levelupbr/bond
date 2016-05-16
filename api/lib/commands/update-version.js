@@ -20,8 +20,12 @@ let updateVersion = {
             version.setStatus(data.status);
             version.data = data.data;
             version.save(function(err, version) {
-                if (err) defered.reject(err);
-                else defered.resolve(version);
+                if (err) {
+                    defered.reject(err);
+                }
+                else {
+                    defered.resolve(version);
+                }
             });
         });
 
