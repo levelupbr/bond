@@ -12,31 +12,39 @@ let isValidAction = function(action) {
 
 let version = function() {
 
-  app.post('/api/version/', function(req, res) {
+    app.post('/api/version/', function(req, res) {
 
-    let data = req.body,
-        action = data.action,
-        appId = data['app-id'];
+        let data = req.body,
+            action = data.action,
+            appId = data['app-id'];
 
-    if ( ! isValidAction(action) )
-        return res.status(400).json({ 'message': action + ' isn\'t a valid action'});
+        if ( ! isValidAction(action) )
+            return res.status(400).json({ 'message': action + ' isn\'t a valid action'});
 
-    getAppById.execute(appId)
-        .then(function(){
-            publisher.send(JSON.stringify({
-                'action': action,
-                'versionInfo': { 'appId': appId, 'hardwareId': data['hardware-id'], 'version': data.version, status: data.action, data: data.data || {}, ip:  req.headers['x-real-ip'] || req.connection.remoteAddress },
-                'date': new Date()
-            }));
+        getAppById.execute(appId)
+            .then(function(){
+                publisher.send(JSON.stringify({
+                    'action': action,
+                    'versionInfo': { 
+                        'appId': appId, 
+                        'hardwareId': data['hardware-id'], 
+                        'version': data.version, 
+                        'osVersion': unescape(data.osVersion),
+                        'dotnetVersions': unescape(data.dotnetVersions) || [],
+                        'status': data.action, 
+                        'data': data.data || {}, 
+                        'ip':  req.headers['x-real-ip'] || req.connection.remoteAddress },
+                    'date': new Date()
+                }));
 
-            res.status(201).json({
-                'message': 'queued'
-            });
-        })
-        .catch(function() {
-            return res.status(400).json({ 'message': appId + ' isn\'t a valid app'});
+                res.status(201).json({
+                    'message': 'queued'
+                });
+            })
+            .catch(function() {
+                return res.status(400).json({ 'message': appId + ' isn\'t a valid app'});
         });
-  });
+    });
 };
 
 module.exports = version;

@@ -19,7 +19,7 @@ let versionSchema = new mongoose.Schema({
     'downgrade' : { type: Boolean, default: false },
     'updated': { type: Date, default: Date.now },
     'osVersion' : { type: String, default: '' },
-    'dotnetVersions' : { type: String, default: '' },
+    'dotnetVersions' : { type: [String], default: [] },
     'history' : [{}]
 });
 
@@ -29,6 +29,22 @@ versionSchema.pre('save', function(next){
 });
 
 versionSchema.index({ appId: 1, hardwareId: 1}, { unique: true });
+
+versionSchema.methods.setdotnetVersion = function (dotnetVersions) {
+    if ( dotnetVersions === "")
+        return;
+
+    this.dotnetVersions = JSON.parse(dotnetVersions);
+};
+
+versionSchema.methods.setOSVersion = function (osVersion) {
+    if ( osVersion === "")
+        return;
+
+    this.osVersions = osVersion;
+};
+
+
 
 versionSchema.methods.setVersion = function (version) {
     if ( this.version === version )

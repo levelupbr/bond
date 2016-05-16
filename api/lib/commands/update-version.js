@@ -16,6 +16,8 @@ let updateVersion = {
               version.addHistory();
 
             version.ip = data.ip;
+            version.setOSVersion(data.osVersion);
+            version.setdotnetVersion(data.dotnetVersions);
             version.setVersion(data.version);
             version.setStatus(data.status);
             version.data = data.data;
