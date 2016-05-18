@@ -101,17 +101,15 @@ let getAppStatsById = {
 
         let match = { appId: id };
 
-        if ( q ) {
+        if (q) {
+            let date1 = new Date(q.start||q) ,
+                date2 = new Date(q.end||q);
 
-          let date1 = new Date(q.start||q) ,
-            date2 = new Date(q.end||q);
-
-          date2.setDate(date2.getDate() + 1);
-          match.updated = { $gte: date1, $lt:  date2};
-
+            date2.setDate(date2.getDate() + 1);
+            match.updated = { $gte: date1, $lt:  date2};
         }
 
-        var q = Version.aggregate([
+        Version.aggregate([
             {
                 $match: match
             },
@@ -119,71 +117,78 @@ let getAppStatsById = {
                 $project: {
                     version: '$version',
                     from: '$from',
-                    online: {
-                        $cond: {
-                            if : {
-                                $eq: ['$status', 2]
-                            },
-                            then: 1,
-                            else: 0
-                        }
-                    },
-                    offline: {
-                        $cond: {
-                            if : {
-                                $eq: ['$status', 1]
-                            },
-                            then: 1,
-                            else: 0
-                        }
-                    },
-                    inactive: {
-                        $cond: {
-                            if : {
-                                $eq: ['$status', 0]
-                            },
-                            then: 1,
-                            else: 0
-                        }
-                    },
-                    downgrade: {
-                        $cond: {
-                            if : {
-                                $eq: ['$downgrade', true]
-                            },
-                            then: 1,
-                            else: 0
-                        }
-                    }
+                    status: '$status',
+                    downgrade: '$downgrade'
                 }
             },
             {
                 $group: {
-                    _id: {
-                        version: '$version',
-                        from: '$from'
-                    },
-                    count: {
-                        $sum: 1
-                    },
-                    inactive: {
-                        $sum: '$inactive'
-                    },
-                    online: {
-                        $sum: '$online'
-                    },
-                    offline: {
-                        $sum: '$offline'
-                    },
-                    downgrade: {
-                        $sum: '$downgrade'
+                  _id: {
+                    version: '$version',
+                    from: '$from'
+                  },
+                  count: {
+                    $sum: 1
+                  },
+                  inactive: {
+                    $sum: {
+                      $cond: {
+                        if: {
+                          $eq: [
+                            '$status',
+                            0
+                          ]
+                        },
+                        then: 1,
+                        else: 0
+                      }
                     }
+                  },
+                  online: {
+                    $sum: {
+                      $cond: {
+                        if: {
+                          $eq: [
+                            '$status',
+                            2
+                          ]
+                        },
+                        then: 1,
+                        else: 0
+                      }
+                    }
+                  },
+                  offline: {
+                    $sum: {
+                      $cond: {
+                        if: {
+                          $eq: [
+                            '$status',
+                            1
+                          ]
+                        },
+                        then: 1,
+                        else: 0
+                      }
+                    }
+                  },
+                  downgrade: {
+                    $sum: {
+                      $cond: {
+                        if: {
+                          $eq: [
+                            '$downgrade',
+                            true
+                          ]
+                        },
+                        then: 1,
+                        else: 0
+                      }
+                    }
+                  }
                 }
             }
-        ]);
-        q.options = { allowDiskUse : true};
-
-        q.exec(function(err, result){
+        ]).exec(function(err, result){
             if (err) return defered.reject(err);
             defered.resolve(summarize.exec(result));
         });

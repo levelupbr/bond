@@ -41,7 +41,7 @@ versionSchema.methods.setOSVersion = function (osVersion) {
     if ( osVersion === "")
         return;
 
-    this.osVersions = osVersion;
+    this.osVersion = osVersion;
 };
 
 

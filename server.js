@@ -9,6 +9,18 @@ const
   versions = require('./api/routes/versions')(),
   versionProcessor = require('./api/services/version-processor')();
 
+/*
+if(environment == 'development'){
+  const express = require('express');
+  var appRoot = __dirname;
+
+  app.use(express.static('./app/'));
+
+  app.get('*', function(request, response, next) {
+    response.sendFile(appRoot + '/app/index.html');
+  });    
+}
+*/
 
 let server = app.listen(process.env.PORT|| 8080, function () {
   var host = server.address().address;
