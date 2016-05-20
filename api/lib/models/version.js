@@ -34,16 +34,14 @@ versionSchema.methods.setdotnetVersion = function (dotnetVersions) {
     if ( dotnetVersions === "")
         return;
 
-    if(dotnetVersions !== undefined)
-      this.dotnetVersions = JSON.parse(dotnetVersions);
+    this.dotnetVersions = JSON.parse(dotnetVersions);
 };
 
 versionSchema.methods.setOSVersion = function (osVersion) {
     if ( osVersion === "")
         return;
 
-    if(osVersion !== undefined)
-      this.osVersion = osVersion;
+    this.osVersion = osVersion;
 };
 
 
